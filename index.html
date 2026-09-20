@@ -316,14 +316,23 @@
             </a>
           </nav>
 
-          <!-- Far Right Controls: Language Switcher (ID/EN) & Siaran Makkah -->
-          <div class="flex items-center gap-2.5 sm:gap-3">
+          <!-- Far Right Controls: Mode Ibadah, Language Switcher (ID/EN) & Siaran Makkah -->
+          <div class="flex items-center gap-1.5 sm:gap-2.5">
+            <!-- Mode Ibadah Toggle Button -->
+            <button id="toggle-ibadah-mode-btn" onclick="toggleIbadahMode(true)" class="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-[#08221b] border border-[#14483b] hover:border-gold-400/60 text-amber-100 hover:text-white transition-all duration-200 flex items-center gap-1.5 sm:gap-2 text-xs font-semibold shadow-sm group cursor-pointer" title="Mode Ibadah: Redupkan layar & fokus waktu shalat di masjid">
+              <div class="relative flex items-center justify-center">
+                <i data-lucide="moon" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gold-400 group-hover:scale-110 transition-transform"></i>
+                <span id="ibadah-active-dot" class="hidden absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              </div>
+              <span class="hidden sm:inline font-medium text-[11px] sm:text-xs" data-i18n="nav_ibadah_mode">Mode Ibadah</span>
+            </button>
+
             <!-- Language Switcher (ID / EN) -->
             <div class="flex items-center p-1 rounded-xl bg-[#08221b] border border-[#14483b] shadow-sm text-xs font-bold" id="lang-switcher" role="group" aria-label="Language Selector">
-              <button id="lang-btn-id" onclick="setLanguage('id')" class="px-2.5 py-1 rounded-lg transition-all duration-200 flex items-center gap-1 bg-[#f5b731] text-[#021410] shadow-sm font-extrabold" title="Bahasa Indonesia">
+              <button id="lang-btn-id" onclick="setLanguage('id')" class="px-2 sm:px-2.5 py-1 rounded-lg transition-all duration-200 flex items-center gap-1 bg-[#f5b731] text-[#021410] shadow-sm font-extrabold" title="Bahasa Indonesia">
                 <span>ID</span>
               </button>
-              <button id="lang-btn-en" onclick="setLanguage('en')" class="px-2.5 py-1 rounded-lg transition-all duration-200 flex items-center gap-1 text-amber-200/70 hover:text-white font-semibold" title="English">
+              <button id="lang-btn-en" onclick="setLanguage('en')" class="px-2 sm:px-2.5 py-1 rounded-lg transition-all duration-200 flex items-center gap-1 text-amber-200/70 hover:text-white font-semibold" title="English">
                 <span>EN</span>
               </button>
             </div>
@@ -846,75 +855,75 @@
     </section>
 
     <!-- REAL-TIME PRAYER TIMES & COUNTDOWN SECTION -->
-    <section id="prayer-times" class="py-12 bg-gradient-to-b from-[#031c19] via-emerald-950/80 to-[#031c19] border-y border-gold-500/20 relative">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="prayer-times" class="py-8 sm:py-12 bg-gradient-to-b from-[#031c19] via-emerald-950/80 to-[#031c19] border-y border-gold-500/20 relative">
+      <div class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
         
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 reveal-on-scroll">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-5 sm:mb-8 gap-3 sm:gap-4 reveal-on-scroll">
           <div>
-            <div class="flex items-center gap-2 text-xs font-semibold text-gold-400 uppercase tracking-widest mb-1">
+            <div class="flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold text-gold-400 uppercase tracking-widest mb-1">
               <i data-lucide="clock" class="w-3.5 h-3.5"></i>
               <span data-i18n="prayer_badge">Kalkulasi Hisab Umm Al-Qura</span>
             </div>
-            <h2 class="text-2xl sm:text-4xl font-serif font-bold text-white" data-i18n="prayer_heading">Jadwal Shalat Harian & Hitung Mundur</h2>
-            <p class="text-sm text-amber-100/60 mt-1" data-i18n="prayer_desc">Jadwal resmi waktu shalat untuk Dua Kota Suci dengan hitung mundur otomatis menuju adzan berikutnya.</p>
+            <h2 class="text-xl sm:text-3xl lg:text-4xl font-serif font-bold text-white tracking-tight" data-i18n="prayer_heading">Jadwal Shalat Harian & Hitung Mundur</h2>
+            <p class="text-xs sm:text-sm text-amber-100/65 mt-0.5 sm:mt-1 max-w-2xl" data-i18n="prayer_desc">Jadwal resmi waktu shalat untuk Dua Kota Suci dengan hitung mundur otomatis menuju adzan berikutnya.</p>
           </div>
 
           <!-- City Selector for Prayer Times -->
-          <div class="flex items-center p-1 rounded-xl bg-emerald-900/50 border border-gold-500/20">
-            <button id="prayer-city-makkah" onclick="switchPrayerCity('makkah')" class="px-4 py-2 rounded-lg text-xs font-bold transition bg-gold-500 text-emerald-950 shadow">
+          <div class="inline-flex self-start sm:self-auto items-center p-1 rounded-xl bg-emerald-900/60 border border-gold-500/25 shadow-inner">
+            <button id="prayer-city-makkah" onclick="switchPrayerCity('makkah')" class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs font-bold transition bg-gold-500 text-emerald-950 shadow">
               <span data-i18n="prayer_city_makkah">Makkah Al-Mukarramah</span>
             </button>
-            <button id="prayer-city-madinah" onclick="switchPrayerCity('madinah')" class="px-4 py-2 rounded-lg text-xs font-medium text-amber-200/70 hover:text-white transition">
+            <button id="prayer-city-madinah" onclick="switchPrayerCity('madinah')" class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs font-medium text-amber-200/70 hover:text-white transition">
               <span data-i18n="prayer_city_madinah">Madinah Al-Munawwarah</span>
             </button>
           </div>
         </div>
 
         <!-- Next Prayer Countdown Banner -->
-        <div class="rounded-2xl p-6 sm:p-8 bg-gradient-to-r from-emerald-900 via-emerald-850 to-emerald-900 border border-gold-500/40 shadow-2xl mb-8 relative overflow-hidden reveal-on-scroll reveal-delay-1">
-          <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-gold-500/10 rounded-full blur-2xl"></div>
+        <div class="rounded-2xl p-4 sm:p-6 lg:p-7 bg-gradient-to-br from-emerald-900 via-emerald-850 to-emerald-900 border border-gold-500/40 shadow-2xl mb-4 sm:mb-6 relative overflow-hidden reveal-on-scroll reveal-delay-1">
+          <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-gold-500/10 rounded-full blur-2xl pointer-events-none"></div>
           
-          <div class="flex flex-col lg:flex-row items-center justify-between gap-6 relative z-10">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 relative z-10">
             
-            <div class="flex items-center gap-4 text-center lg:text-left">
-              <div class="w-16 h-16 rounded-2xl bg-gold-500/20 border border-gold-500/40 flex items-center justify-center text-gold-400 shadow-inner shrink-0">
-                <i id="next-prayer-icon" data-lucide="sun" class="w-8 h-8"></i>
+            <div class="flex items-center gap-3 sm:gap-4 w-full md:w-auto">
+              <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl sm:rounded-2xl bg-gold-500/20 border border-gold-500/40 flex items-center justify-center text-gold-400 shadow-inner shrink-0">
+                <i id="next-prayer-icon" data-lucide="sun" class="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8"></i>
               </div>
-              <div>
-                <span class="text-xs uppercase tracking-widest text-gold-400 font-bold" data-i18n="prayer_next_label">Waktu Shalat Berikutnya</span>
-                <h3 class="text-3xl sm:text-4xl font-serif font-extrabold text-white flex items-center gap-3">
-                  <span id="next-prayer-name">Maghrib</span>
-                  <span id="next-prayer-arabic" class="font-arabic text-2xl text-gold-300">المغرب</span>
+              <div class="min-w-0 flex-1">
+                <span class="text-[10px] sm:text-xs uppercase tracking-wider text-gold-400 font-bold block" data-i18n="prayer_next_label">Waktu Shalat Berikutnya</span>
+                <h3 class="text-xl sm:text-3xl lg:text-4xl font-serif font-extrabold text-white flex items-center gap-2 sm:gap-3 leading-tight">
+                  <span id="next-prayer-name" class="truncate">Maghrib</span>
+                  <span id="next-prayer-arabic" class="font-arabic text-lg sm:text-2xl text-gold-300 shrink-0">المغرب</span>
                 </h3>
-                <p class="text-xs sm:text-sm text-amber-200/70 mt-1">
-                  <span data-i18n="prayer_at_time">Pukul</span> <span id="next-prayer-time" class="font-bold text-white font-mono text-base">18:24 AST</span> <span data-i18n="prayer_in_city">di</span> <span id="current-prayer-city-label" class="font-semibold text-gold-300">Makkah Al-Mukarramah</span>
+                <p class="text-[11px] sm:text-xs lg:text-sm text-amber-200/70 mt-0.5 truncate">
+                  <span data-i18n="prayer_at_time">Pukul</span> <span id="next-prayer-time" class="font-bold text-white font-mono text-xs sm:text-base">18:24 AST</span> <span data-i18n="prayer_in_city">di</span> <span id="current-prayer-city-label" class="font-semibold text-gold-300">Makkah Al-Mukarramah</span>
                 </p>
               </div>
             </div>
 
             <!-- Countdown Timer Units -->
-            <div class="flex items-center gap-3 sm:gap-4">
-              <div class="px-4 py-3 sm:px-5 sm:py-4 rounded-xl bg-emerald-950/80 border border-gold-500/30 text-center min-w-[70px] sm:min-w-[84px]">
-                <span id="cd-hours" class="block font-mono text-2xl sm:text-4xl font-black text-gold-300">00</span>
-                <span class="text-[10px] sm:text-xs text-amber-200/60 uppercase font-semibold" data-i18n="cd_hours">Jam</span>
+            <div class="flex items-center justify-center gap-2 sm:gap-3 lg:gap-4 w-full md:w-auto pt-2 md:pt-0 border-t border-gold-500/15 md:border-t-0">
+              <div class="flex-1 md:flex-none px-2.5 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-xl bg-emerald-950/85 border border-gold-500/30 text-center min-w-[58px] sm:min-w-[76px] lg:min-w-[84px] shadow-sm">
+                <span id="cd-hours" class="block font-mono text-xl sm:text-3xl lg:text-4xl font-black text-gold-300 leading-none">00</span>
+                <span class="text-[9px] sm:text-[10px] lg:text-xs text-amber-200/60 uppercase font-semibold mt-1 block" data-i18n="cd_hours">Jam</span>
               </div>
-              <span class="text-2xl font-bold text-gold-400">:</span>
-              <div class="px-4 py-3 sm:px-5 sm:py-4 rounded-xl bg-emerald-950/80 border border-gold-500/30 text-center min-w-[70px] sm:min-w-[84px]">
-                <span id="cd-mins" class="block font-mono text-2xl sm:text-4xl font-black text-gold-300">00</span>
-                <span class="text-[10px] sm:text-xs text-amber-200/60 uppercase font-semibold" data-i18n="cd_mins">Menit</span>
+              <span class="text-lg sm:text-2xl font-bold text-gold-400">:</span>
+              <div class="flex-1 md:flex-none px-2.5 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-xl bg-emerald-950/85 border border-gold-500/30 text-center min-w-[58px] sm:min-w-[76px] lg:min-w-[84px] shadow-sm">
+                <span id="cd-mins" class="block font-mono text-xl sm:text-3xl lg:text-4xl font-black text-gold-300 leading-none">00</span>
+                <span class="text-[9px] sm:text-[10px] lg:text-xs text-amber-200/60 uppercase font-semibold mt-1 block" data-i18n="cd_mins">Menit</span>
               </div>
-              <span class="text-2xl font-bold text-gold-400">:</span>
-              <div class="px-4 py-3 sm:px-5 sm:py-4 rounded-xl bg-emerald-950/80 border border-gold-500/30 text-center min-w-[70px] sm:min-w-[84px]">
-                <span id="cd-secs" class="block font-mono text-2xl sm:text-4xl font-black text-gold-400 animate-pulse">00</span>
-                <span class="text-[10px] sm:text-xs text-amber-200/60 uppercase font-semibold" data-i18n="cd_secs">Detik</span>
+              <span class="text-lg sm:text-2xl font-bold text-gold-400">:</span>
+              <div class="flex-1 md:flex-none px-2.5 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-xl bg-emerald-950/85 border border-gold-500/30 text-center min-w-[58px] sm:min-w-[76px] lg:min-w-[84px] shadow-sm">
+                <span id="cd-secs" class="block font-mono text-xl sm:text-3xl lg:text-4xl font-black text-gold-400 animate-pulse leading-none">00</span>
+                <span class="text-[9px] sm:text-[10px] lg:text-xs text-amber-200/60 uppercase font-semibold mt-1 block" data-i18n="cd_secs">Detik</span>
               </div>
             </div>
 
           </div>
         </div>
 
-        <!-- Grid of 6 Prayer Times (Fajr, Shuruq, Dhuhr, Asr, Maghrib, Isha) -->
-        <div id="prayer-cards-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 reveal-on-scroll reveal-delay-2">
+        <!-- Grid of 6 Prayer Times (Fajr, Shuruq, Dhuhr, Asr, Maghrib, Isha) in dense 3-column grid on mobile (3x2) -->
+        <div id="prayer-cards-grid" class="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3 lg:gap-4 reveal-on-scroll reveal-delay-2">
           <!-- Populated by JavaScript -->
         </div>
 
@@ -1228,6 +1237,167 @@
       </div>
     </div>
 
+    <!-- MODE IBADAH (WORSHIP & SERENITY FOCUS HUD) -->
+    <div id="ibadah-mode-overlay" class="fixed inset-0 z-[100] flex flex-col bg-[#010907]/96 backdrop-blur-xl opacity-0 pointer-events-none transition-all duration-700 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="ibadah-overlay-title">
+      
+      <!-- Top Sticky Serenity Bar -->
+      <div class="sticky top-0 z-20 px-3.5 sm:px-8 py-3 sm:py-3.5 bg-[#010f0b]/92 border-b border-gold-500/20 backdrop-blur-md flex items-center justify-between gap-2.5 sm:gap-4">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <div class="w-8 h-8 rounded-xl bg-gold-500/20 border border-gold-500/40 flex items-center justify-center text-gold-400 shrink-0">
+            <i data-lucide="moon-star" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h2 id="ibadah-overlay-title" class="text-xs sm:text-base font-bold text-white tracking-wide">
+              <span data-i18n="ibadah_title">Mode Ibadah & Khusyuk</span>
+            </h2>
+            <p class="text-[11px] text-amber-200/60 hidden sm:block" data-i18n="ibadah_desc">Tampilan diredupkan lembut untuk kenyamanan mata & menjaga adab di dalam masjid.</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-1.5 sm:gap-2.5">
+          <!-- City Switcher in Ibadah Mode -->
+          <div class="flex items-center p-0.5 sm:p-1 rounded-xl bg-emerald-950/70 border border-gold-500/25">
+            <button id="ibadah-city-makkah" onclick="switchIbadahCity('makkah')" class="px-2 sm:px-3 py-1 rounded-lg text-[11px] sm:text-xs font-bold transition bg-gold-500 text-emerald-950 shadow">
+              <span>Makkah</span>
+            </button>
+            <button id="ibadah-city-madinah" onclick="switchIbadahCity('madinah')" class="px-2 sm:px-3 py-1 rounded-lg text-[11px] sm:text-xs font-medium text-amber-200/70 hover:text-white transition">
+              <span>Madinah</span>
+            </button>
+          </div>
+
+          <!-- Dim Level Adjuster (Soft / OLED Deep) -->
+          <button id="ibadah-dim-btn" onclick="toggleIbadahDimDepth()" class="hidden md:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-emerald-950/80 border border-gold-500/25 text-amber-200/80 hover:text-white text-xs font-medium transition" title="Pilih tingkat kegelapan latar">
+            <i data-lucide="sun-dim" class="w-3.5 h-3.5 text-gold-400"></i>
+            <span id="ibadah-dim-label">Redup 85%</span>
+          </button>
+
+          <!-- Exit Button -->
+          <button type="button" onclick="toggleIbadahMode(false)" class="flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 hover:brightness-110 text-emerald-950 font-bold text-xs shadow-md transition cursor-pointer" title="Keluar Mode Ibadah (Tekan ESC)">
+            <i data-lucide="x" class="w-4 h-4"></i>
+            <span data-i18n="ibadah_exit_btn">Keluar (ESC)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Focus Canvas Content -->
+      <div class="flex-1 max-w-5xl w-full mx-auto px-3.5 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-5 sm:space-y-6">
+        
+        <!-- Mosque Etiquette & Phone Silence Notice Banner -->
+        <div class="flex items-center gap-3 sm:gap-3.5 p-3 sm:p-4 rounded-2xl bg-gradient-to-r from-emerald-950/90 via-[#03241c]/90 to-emerald-950/90 border border-gold-500/30 shadow-lg text-xs">
+          <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gold-500/15 border border-gold-500/30 flex items-center justify-center text-gold-400 shrink-0">
+            <i data-lucide="volume-x" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4 class="font-bold text-white text-xs sm:text-sm tracking-wide" data-i18n="ibadah_silence_title">Adab di Dalam Masjid</h4>
+            <p class="text-amber-200/70 text-[11px] sm:text-xs mt-0.5" data-i18n="ibadah_silence_desc">Harap pastikan ponsel dalam mode hening (silent) dan jaga ketenangan selama berada di rumah Allah.</p>
+          </div>
+          <div class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-900/60 text-emerald-300 text-[10px] font-semibold uppercase tracking-wider border border-emerald-500/30 shrink-0">
+            <i data-lucide="bell-off" class="w-3.5 h-3.5"></i>
+            <span>Mode Hening</span>
+          </div>
+        </div>
+
+        <!-- Prominent Next Prayer & Real-Time Countdown Hero Card -->
+        <div class="rounded-3xl p-5 sm:p-8 bg-gradient-to-br from-[#052b22] via-[#031d17] to-[#02130f] border-2 border-gold-400/50 shadow-[0_20px_60px_rgba(0,0,0,0.85)] relative overflow-hidden text-center">
+          <div class="absolute -right-12 -bottom-12 w-64 h-64 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="absolute -left-12 -top-12 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div class="relative z-10 max-w-3xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/15 border border-gold-500/35 text-gold-300 text-xs font-bold tracking-widest uppercase mb-3">
+              <i data-lucide="clock" class="w-3.5 h-3.5 text-gold-400"></i>
+              <span data-i18n="prayer_next_label">Waktu Shalat Berikutnya</span>
+            </div>
+
+            <!-- Prayer Title & Arabic Calligraphy -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-4 mb-1 sm:mb-2">
+              <h3 id="ibadah-next-prayer-name" class="text-3xl sm:text-5xl font-serif font-black text-white tracking-tight">Maghrib</h3>
+              <span id="ibadah-next-prayer-arabic" class="font-arabic text-2xl sm:text-4xl text-gold-300">المغرب</span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-amber-200/80 mb-4 sm:mb-6">
+              <span data-i18n="prayer_at_time">Pukul</span> <span id="ibadah-next-prayer-time" class="font-bold text-white font-mono text-base sm:text-lg">18:24 AST</span> <span data-i18n="prayer_in_city">di</span> <span id="ibadah-city-label" class="font-bold text-gold-300">Makkah Al-Mukarramah</span>
+            </p>
+
+            <!-- Giant Countdown Digits -->
+            <div class="flex items-center justify-center gap-2 sm:gap-4 my-3 sm:my-6">
+              <div class="flex-1 max-w-[90px] sm:max-w-[130px] px-2.5 py-2.5 sm:px-5 sm:py-5 rounded-2xl bg-black/65 border border-gold-500/40 shadow-inner">
+                <span id="ibadah-cd-hours" class="block font-mono text-2xl sm:text-5xl font-black text-gold-300 leading-none">00</span>
+                <span class="text-[9px] sm:text-xs text-amber-200/70 uppercase font-semibold mt-1.5 sm:mt-2 block" data-i18n="cd_hours">Jam</span>
+              </div>
+              <span class="text-xl sm:text-4xl font-bold text-gold-400 animate-pulse">:</span>
+              <div class="flex-1 max-w-[90px] sm:max-w-[130px] px-2.5 py-2.5 sm:px-5 sm:py-5 rounded-2xl bg-black/65 border border-gold-500/40 shadow-inner">
+                <span id="ibadah-cd-mins" class="block font-mono text-2xl sm:text-5xl font-black text-gold-300 leading-none">00</span>
+                <span class="text-[9px] sm:text-xs text-amber-200/70 uppercase font-semibold mt-1.5 sm:mt-2 block" data-i18n="cd_mins">Menit</span>
+              </div>
+              <span class="text-xl sm:text-4xl font-bold text-gold-400 animate-pulse">:</span>
+              <div class="flex-1 max-w-[90px] sm:max-w-[130px] px-2.5 py-2.5 sm:px-5 sm:py-5 rounded-2xl bg-black/65 border border-gold-500/40 shadow-inner">
+                <span id="ibadah-cd-secs" class="block font-mono text-2xl sm:text-5xl font-black text-gold-400 animate-pulse leading-none">00</span>
+                <span class="text-[9px] sm:text-xs text-amber-200/70 uppercase font-semibold mt-1.5 sm:mt-2 block" data-i18n="cd_secs">Detik</span>
+              </div>
+            </div>
+
+            <!-- Real-Time AST Clock Display -->
+            <div class="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-gold-500/20 flex flex-wrap items-center justify-center gap-3 sm:gap-8 text-[11px] sm:text-xs text-amber-200/70">
+              <div class="flex items-center gap-1.5">
+                <i data-lucide="watch" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gold-400"></i>
+                <span>Waktu Sekarang (AST):</span>
+                <span id="ibadah-current-time" class="font-mono font-bold text-white text-xs sm:text-sm">--:--:-- AST</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <i data-lucide="calendar" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gold-400"></i>
+                <span id="ibadah-current-date">--</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 6 Prayer Times Horizontal Bar (High Contrast) -->
+        <div id="ibadah-prayer-grid" class="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Eye-Friendly Dzikir, Doa & Digital Tasbih Section -->
+        <div class="rounded-3xl p-4 sm:p-7 bg-[#021813]/90 border border-gold-500/25 shadow-xl">
+          
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 sm:mb-5 border-b border-gold-500/20 pb-3 sm:pb-4">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-xl bg-gold-500/15 border border-gold-500/30 flex items-center justify-center text-gold-400 shrink-0">
+                <i data-lucide="book-open" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-xs sm:text-base tracking-wide" data-i18n="ibadah_dhikr_title">Kumpulan Dzikir & Doa Ringkas Ramah Mata</h4>
+                <p class="text-[10px] sm:text-[11px] text-amber-200/60" data-i18n="ibadah_dhikr_subtitle">Teks kontras tinggi dengan harakat jelas untuk dibaca di dalam masjid.</p>
+              </div>
+            </div>
+
+            <!-- Dzikir Category Tabs -->
+            <div class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
+              <button id="dhikr-tab-wirid" onclick="switchIbadahDhikrTab('wirid')" class="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-bold transition bg-gold-500 text-emerald-950 shadow whitespace-nowrap">
+                <span data-i18n="ibadah_tab_wirid">Wirid Ba'da Shalat</span>
+              </button>
+              <button id="dhikr-tab-sayyidul" onclick="switchIbadahDhikrTab('sayyidul')" class="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-medium text-amber-200/70 hover:text-white hover:bg-emerald-900/40 transition whitespace-nowrap">
+                <span data-i18n="ibadah_tab_sayyidul">Sayyidul Istighfar</span>
+              </button>
+              <button id="dhikr-tab-masjid" onclick="switchIbadahDhikrTab('masjid')" class="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-medium text-amber-200/70 hover:text-white hover:bg-emerald-900/40 transition whitespace-nowrap">
+                <span data-i18n="ibadah_tab_masjid">Doa Masjid</span>
+              </button>
+              <button id="dhikr-tab-ayatkursi" onclick="switchIbadahDhikrTab('ayatkursi')" class="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-medium text-amber-200/70 hover:text-white hover:bg-emerald-900/40 transition whitespace-nowrap">
+                <span data-i18n="ibadah_tab_ayatkursi">Ayat Kursi</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Active Dzikir Content Area -->
+          <div id="ibadah-dhikr-content" class="space-y-4">
+            <!-- Populated by JS -->
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
     <!-- Audio Player Element & Vanilla JavaScript Application Engine -->
     <audio id="core-audio-element" preload="none"></audio>
 
@@ -1392,7 +1562,24 @@
           stat_status_label: "Keutamaan Utama",
           stat_capacity_label: "Kapasitas Puncak",
           stat_area_label: "Luas Area",
-          stat_landmarks_label: "Situs Suci Utama"
+          stat_landmarks_label: "Situs Suci Utama",
+          nav_ibadah_mode: "Mode Ibadah",
+          ibadah_title: "Mode Ibadah & Khusyuk",
+          ibadah_active_badge: "Khusyuk Aktif",
+          ibadah_desc: "Tampilan diredupkan lembut untuk kenyamanan mata & menjaga adab di dalam masjid.",
+          ibadah_silence_title: "Adab di Dalam Masjid",
+          ibadah_silence_desc: "Harap pastikan ponsel dalam mode hening (silent) dan jaga ketenangan selama berada di rumah Allah.",
+          ibadah_exit_btn: "Keluar (ESC)",
+          ibadah_dhikr_title: "Kumpulan Dzikir & Doa Ringkas Ramah Mata",
+          ibadah_dhikr_subtitle: "Teks kontras tinggi dengan harakat jelas untuk dibaca di dalam masjid.",
+          ibadah_tab_wirid: "Wirid Ba'da Shalat",
+          ibadah_tab_sayyidul: "Sayyidul Istighfar",
+          ibadah_tab_masjid: "Doa Masjid",
+          ibadah_tab_ayatkursi: "Ayat Kursi",
+          ibadah_tasbih_title: "Penghitung Tasbih Digital",
+          ibadah_tasbih_tap: "Ketuk untuk Menghitung",
+          ibadah_tasbih_reset: "Reset Hitungan",
+          ibadah_tasbih_completed: "Alhamdulillah Selesai (33x)"
         },
         en: {
           nav_stream_1: "Live",
@@ -1425,7 +1612,7 @@
           pulsa_direct_link: "Visit https://pulsa.haramainlife.com",
           btn_view_map: "Map & Gates",
           nav_broadcast: "Live",
-          hero_badge: "Official Information Portal & Astronomical Precision",
+          hero_badge: "Information of the Two Holy Sanctuaries: Makkah and Madinah",
           hero_title: "Haramain Life Portal",
           hero_desc: "Spiritual guide and real-time monitoring for the Two Holy Sanctuaries: Makkah Al-Mukarramah and Madinah Al-Munawwarah directly from the heart of the Islamic world.",
           hero_quick_audio: "Sacred Adhan of Makkah",
@@ -1519,7 +1706,24 @@
           stat_status_label: "Primary Sanctity",
           stat_capacity_label: "Peak Capacity",
           stat_area_label: "Total Footprint",
-          stat_landmarks_label: "Sacred Landmarks"
+          stat_landmarks_label: "Sacred Landmarks",
+          nav_ibadah_mode: "Worship Mode",
+          ibadah_title: "Worship & Devotion Mode",
+          ibadah_active_badge: "Focus Active",
+          ibadah_desc: "Display gently dimmed to preserve serene focus, eye comfort, and mosque etiquette.",
+          ibadah_silence_title: "Mosque Etiquette & Reverence",
+          ibadah_silence_desc: "Please ensure your device is silenced and maintain tranquility inside the House of Allah.",
+          ibadah_exit_btn: "Exit (ESC)",
+          ibadah_dhikr_title: "Eye-Safe Supplications & Night Reminders",
+          ibadah_dhikr_subtitle: "High-contrast legible text with clear Arabic tashkeel for reciting in the mosque.",
+          ibadah_tab_wirid: "Post-Prayer Wirid",
+          ibadah_tab_sayyidul: "Sayyidul Istighfar",
+          ibadah_tab_masjid: "Mosque Duas",
+          ibadah_tab_ayatkursi: "Ayat Al-Kursi",
+          ibadah_tasbih_title: "Digital Tasbih Counter",
+          ibadah_tasbih_tap: "Tap anywhere to Count",
+          ibadah_tasbih_reset: "Reset Counter",
+          ibadah_tasbih_completed: "Alhamdulillah Completed (33x)"
         }
       };
       window.translations = translations;
@@ -1874,12 +2078,16 @@
       }
 
       function getNextPrayer() {
+        return getNextPrayerForCity(selectedPrayerCity);
+      }
+
+      function getNextPrayerForCity(city) {
         const now = new Date();
         const astString = now.toLocaleString("en-US", { timeZone: "Asia/Riyadh" });
         const astDate = new Date(astString);
         const currentMins = astDate.getHours() * 60 + astDate.getMinutes();
 
-        const list = prayerSchedules[selectedPrayerCity] || prayerSchedules.makkah;
+        const list = prayerSchedules[city] || prayerSchedules.makkah;
         for (let item of list) {
           const [h, m] = item.time.split(':').map(Number);
           const prayerMins = h * 60 + m;
@@ -1895,29 +2103,81 @@
         if (!next) return;
 
         const nextName = document.getElementById('next-prayer-name');
-        if (!nextName) return;
+        if (nextName) {
+          const translatedPrayerName = (prayerNamesI18n[currentLang] && prayerNamesI18n[currentLang][next.key]) || next.name;
+          nextName.innerText = translatedPrayerName;
+          document.getElementById('next-prayer-arabic').innerText = next.arabic;
+          document.getElementById('next-prayer-time').innerText = `${next.time} AST`;
 
-        const translatedPrayerName = (prayerNamesI18n[currentLang] && prayerNamesI18n[currentLang][next.key]) || next.name;
-        nextName.innerText = translatedPrayerName;
-        document.getElementById('next-prayer-arabic').innerText = next.arabic;
-        document.getElementById('next-prayer-time').innerText = `${next.time} AST`;
+          const [h, m] = next.time.split(':').map(Number);
+          let target = new Date(astDate);
+          target.setHours(h, m, 0, 0);
 
-        const [h, m] = next.time.split(':').map(Number);
-        let target = new Date(astDate);
-        target.setHours(h, m, 0, 0);
+          if (target <= astDate) {
+            target.setDate(target.getDate() + 1);
+          }
 
-        if (target <= astDate) {
-          target.setDate(target.getDate() + 1);
+          const diffSecs = Math.max(0, Math.floor((target - astDate) / 1000));
+          const hours = Math.floor(diffSecs / 3600);
+          const mins = Math.floor((diffSecs % 3600) / 60);
+          const secs = diffSecs % 60;
+
+          document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
+          document.getElementById('cd-mins').innerText = String(mins).padStart(2, '0');
+          document.getElementById('cd-secs').innerText = String(secs).padStart(2, '0');
         }
 
-        const diffSecs = Math.max(0, Math.floor((target - astDate) / 1000));
-        const hours = Math.floor(diffSecs / 3600);
-        const mins = Math.floor((diffSecs % 3600) / 60);
-        const secs = diffSecs % 60;
+        // Real-time synchronization for Mode Ibadah HUD if elements exist
+        const ibadahNextName = document.getElementById('ibadah-next-prayer-name');
+        if (ibadahNextName) {
+          const ibadahNext = getNextPrayerForCity(ibadahCity);
+          if (ibadahNext) {
+            const translatedIbadahName = (prayerNamesI18n[currentLang] && prayerNamesI18n[currentLang][ibadahNext.key]) || ibadahNext.name;
+            ibadahNextName.innerText = translatedIbadahName;
+            const ibadahNextArabic = document.getElementById('ibadah-next-prayer-arabic');
+            if (ibadahNextArabic) ibadahNextArabic.innerText = ibadahNext.arabic;
+            const ibadahNextTime = document.getElementById('ibadah-next-prayer-time');
+            if (ibadahNextTime) ibadahNextTime.innerText = `${ibadahNext.time} AST`;
+            const ibadahCityLabel = document.getElementById('ibadah-city-label');
+            if (ibadahCityLabel) {
+              ibadahCityLabel.innerText = ibadahCity === 'makkah' ? 'Makkah Al-Mukarramah' : 'Madinah Al-Munawwarah';
+            }
 
-        document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
-        document.getElementById('cd-mins').innerText = String(mins).padStart(2, '0');
-        document.getElementById('cd-secs').innerText = String(secs).padStart(2, '0');
+            const [ih, im] = ibadahNext.time.split(':').map(Number);
+            let itarget = new Date(astDate);
+            itarget.setHours(ih, im, 0, 0);
+            if (itarget <= astDate) {
+              itarget.setDate(itarget.getDate() + 1);
+            }
+
+            const idiffSecs = Math.max(0, Math.floor((itarget - astDate) / 1000));
+            const ihours = Math.floor(idiffSecs / 3600);
+            const imins = Math.floor((idiffSecs % 3600) / 60);
+            const isecs = idiffSecs % 60;
+
+            const icdHours = document.getElementById('ibadah-cd-hours');
+            if (icdHours) icdHours.innerText = String(ihours).padStart(2, '0');
+            const icdMins = document.getElementById('ibadah-cd-mins');
+            if (icdMins) icdMins.innerText = String(imins).padStart(2, '0');
+            const icdSecs = document.getElementById('ibadah-cd-secs');
+            if (icdSecs) icdSecs.innerText = String(isecs).padStart(2, '0');
+          }
+
+          const ibadahTimeElem = document.getElementById('ibadah-current-time');
+          if (ibadahTimeElem) {
+            const timeStr = `${String(astDate.getHours()).padStart(2, '0')}:${String(astDate.getMinutes()).padStart(2, '0')}:${String(astDate.getSeconds()).padStart(2, '0')} AST`;
+            ibadahTimeElem.innerText = timeStr;
+          }
+
+          const ibadahDateElem = document.getElementById('ibadah-current-date');
+          if (ibadahDateElem) {
+            const makkahGreg = document.getElementById('makkah-gregorian');
+            const makkahHijri = document.getElementById('makkah-hijri');
+            if (makkahGreg && makkahHijri) {
+              ibadahDateElem.innerText = `${makkahGreg.innerText} • ${makkahHijri.innerText}`;
+            }
+          }
+        }
       }
 
       function renderPrayerCards() {
@@ -1932,19 +2192,21 @@
           const nextBadge = currentLang === 'en' ? 'NEXT' : 'BERIKUTNYA';
 
           return `
-            <div class="rounded-xl p-4 transition-all duration-300 ${
+            <div class="rounded-xl p-2.5 sm:p-3.5 lg:p-4 transition-all duration-300 relative flex flex-col justify-between ${
               isNext 
-                ? 'bg-gradient-to-b from-gold-500/25 via-emerald-900 to-emerald-950 border-2 border-gold-400 shadow-xl shadow-gold-500/10 scale-105' 
-                : 'bg-emerald-950/70 border border-gold-500/20 hover:border-gold-500/40'
+                ? 'bg-gradient-to-b from-gold-500/30 via-emerald-900 to-emerald-950 border-2 border-gold-400 shadow-lg shadow-gold-500/20 ring-1 ring-gold-400/40' 
+                : 'bg-emerald-950/80 border border-gold-500/20 hover:border-gold-400/40 hover:bg-[#03261f]'
             }">
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-bold uppercase tracking-wider ${isNext ? 'text-gold-300 font-extrabold' : 'text-amber-200/60'}">${prayerName}</span>
-                <i data-lucide="${prayer.icon}" class="w-4 h-4 ${isNext ? 'text-gold-400' : 'text-amber-200/40'}"></i>
+              <div class="flex items-center justify-between gap-1 mb-1 sm:mb-2">
+                <span class="text-[11px] sm:text-xs font-bold uppercase tracking-tight sm:tracking-wider truncate ${isNext ? 'text-gold-300 font-extrabold' : 'text-amber-200/75'}">${prayerName}</span>
+                <i data-lucide="${prayer.icon}" class="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 ${isNext ? 'text-gold-400' : 'text-amber-200/40'}"></i>
               </div>
-              <p class="text-xl font-mono font-black text-white">${prayer.time}</p>
-              <div class="flex items-center justify-between mt-2 pt-2 border-t border-gold-500/10">
-                <span class="text-xs font-arabic text-gold-400">${prayer.arabic}</span>
-                ${isNext ? `<span class="text-[9px] px-1.5 py-0.5 rounded bg-gold-400 text-emerald-950 font-bold uppercase">${nextBadge}</span>` : '<span class="text-[10px] text-amber-200/40 font-mono">AST</span>'}
+              <div class="my-0.5 sm:my-1">
+                <p class="text-base sm:text-xl lg:text-2xl font-mono font-black text-white tracking-tight leading-none">${prayer.time}</p>
+              </div>
+              <div class="flex items-center justify-between mt-1 sm:mt-2 pt-1.5 sm:pt-2 border-t border-gold-500/15 gap-1">
+                <span class="text-[10px] sm:text-xs font-arabic text-gold-400 truncate">${prayer.arabic}</span>
+                ${isNext ? `<span class="text-[8px] sm:text-[9px] px-1 sm:px-1.5 py-0.5 rounded bg-gold-400 text-emerald-950 font-extrabold uppercase leading-none shrink-0">${nextBadge}</span>` : '<span class="text-[9px] sm:text-[10px] text-amber-200/40 font-mono shrink-0">AST</span>'}
               </div>
             </div>
           `;
@@ -1983,6 +2245,365 @@
         } else {
           renderPrayerCards();
         }
+      }
+
+      /* =========================================================================
+         MODE IBADAH (WORSHIP / MOSQUE FOCUS SYSTEM)
+         ========================================================================= */
+      let isIbadahModeOpen = false;
+      let ibadahCity = 'makkah';
+      let ibadahDimDepth = 'soft'; // 'soft' | 'deep'
+      let currentIbadahDhikrTab = 'wirid';
+      let tasbihCounts = {
+        subhanallah: 0,
+        alhamdulillah: 0,
+        allahuakbar: 0,
+        istighfar: 0
+      };
+
+      function toggleIbadahMode(forcedState) {
+        const overlay = document.getElementById('ibadah-mode-overlay');
+        const activeDot = document.getElementById('ibadah-active-dot');
+        const btn = document.getElementById('toggle-ibadah-mode-btn');
+        if (!overlay) return;
+
+        if (typeof forcedState === 'boolean') {
+          isIbadahModeOpen = forcedState;
+        } else {
+          isIbadahModeOpen = !isIbadahModeOpen;
+        }
+
+        if (isIbadahModeOpen) {
+          overlay.classList.remove('opacity-0', 'pointer-events-none');
+          overlay.classList.add('opacity-100', 'pointer-events-auto');
+          document.body.classList.add('overflow-hidden');
+          if (activeDot) activeDot.classList.remove('hidden');
+          if (btn) {
+            btn.classList.add('bg-gold-500/20', 'border-gold-400', 'text-white');
+          }
+          renderIbadahPrayerGrid();
+          renderIbadahDhikr();
+          const now = new Date();
+          const astString = now.toLocaleString("en-US", { timeZone: "Asia/Riyadh" });
+          updatePrayerCountdown(new Date(astString));
+        } else {
+          overlay.classList.remove('opacity-100', 'pointer-events-auto');
+          overlay.classList.add('opacity-0', 'pointer-events-none');
+          document.body.classList.remove('overflow-hidden');
+          if (activeDot) activeDot.classList.add('hidden');
+          if (btn) {
+            btn.classList.remove('bg-gold-500/20', 'border-gold-400', 'text-white');
+          }
+        }
+      }
+
+      function switchIbadahCity(city) {
+        if (ibadahCity === city) return;
+        ibadahCity = city;
+        const makkahBtn = document.getElementById('ibadah-city-makkah');
+        const madinahBtn = document.getElementById('ibadah-city-madinah');
+        if (city === 'makkah') {
+          if (makkahBtn) makkahBtn.className = "px-2 sm:px-3 py-1 rounded-lg text-[11px] sm:text-xs font-bold transition bg-gold-500 text-emerald-950 shadow";
+          if (madinahBtn) madinahBtn.className = "px-2 sm:px-3 py-1 rounded-lg text-[11px] sm:text-xs font-medium text-amber-200/70 hover:text-white transition";
+        } else {
+          if (madinahBtn) madinahBtn.className = "px-2 sm:px-3 py-1 rounded-lg text-[11px] sm:text-xs font-bold transition bg-gold-500 text-emerald-950 shadow";
+          if (makkahBtn) makkahBtn.className = "px-2 sm:px-3 py-1 rounded-lg text-[11px] sm:text-xs font-medium text-amber-200/70 hover:text-white transition";
+        }
+        renderIbadahPrayerGrid();
+        const now = new Date();
+        const astString = now.toLocaleString("en-US", { timeZone: "Asia/Riyadh" });
+        updatePrayerCountdown(new Date(astString));
+      }
+
+      function toggleIbadahDimDepth() {
+        const overlay = document.getElementById('ibadah-mode-overlay');
+        const label = document.getElementById('ibadah-dim-label');
+        if (!overlay) return;
+
+        if (ibadahDimDepth === 'soft') {
+          ibadahDimDepth = 'deep';
+          overlay.classList.remove('bg-[#010907]/96');
+          overlay.classList.add('bg-black/99');
+          if (label) label.innerText = currentLang === 'en' ? 'OLED Dark 98%' : 'OLED Gelap 98%';
+        } else {
+          ibadahDimDepth = 'soft';
+          overlay.classList.remove('bg-black/99');
+          overlay.classList.add('bg-[#010907]/96');
+          if (label) label.innerText = currentLang === 'en' ? 'Redup 85%' : 'Redup 85%';
+        }
+      }
+
+      function renderIbadahPrayerGrid() {
+        const grid = document.getElementById('ibadah-prayer-grid');
+        if (!grid) return;
+        const list = prayerSchedules[ibadahCity] || prayerSchedules.makkah;
+        const nextPrayer = getNextPrayerForCity(ibadahCity);
+
+        grid.innerHTML = list.map(prayer => {
+          const isNext = nextPrayer && nextPrayer.key === prayer.key;
+          const prayerName = (prayerNamesI18n[currentLang] && prayerNamesI18n[currentLang][prayer.key]) || prayer.name;
+          const nextBadge = currentLang === 'en' ? 'NEXT' : 'BERIKUTNYA';
+
+          return `
+            <div class="rounded-2xl p-2.5 sm:p-3.5 transition-all duration-300 relative flex flex-col justify-between ${
+              isNext 
+                ? 'bg-gradient-to-b from-gold-500/35 via-emerald-950 to-[#02130f] border-2 border-gold-400 shadow-lg shadow-gold-500/25 ring-1 ring-gold-400/50' 
+                : 'bg-[#031d17]/85 border border-gold-500/20 hover:border-gold-400/40'
+            }">
+              <div class="flex items-center justify-between gap-1 mb-1">
+                <span class="text-[10px] sm:text-xs font-bold uppercase tracking-tight truncate ${isNext ? 'text-gold-300 font-black' : 'text-amber-200/75'}">${prayerName}</span>
+                <i data-lucide="${prayer.icon}" class="w-3.5 h-3.5 shrink-0 ${isNext ? 'text-gold-400' : 'text-amber-200/40'}"></i>
+              </div>
+              <div class="my-0.5 sm:my-1">
+                <p class="text-base sm:text-xl font-mono font-black text-white tracking-tight leading-none">${prayer.time}</p>
+              </div>
+              <div class="flex items-center justify-between mt-1 pt-1.5 border-t border-gold-500/15 gap-1">
+                <span class="text-[10px] sm:text-xs font-arabic text-gold-300 truncate">${prayer.arabic}</span>
+                ${isNext ? `<span class="text-[8px] sm:text-[9px] px-1 sm:px-1.5 py-0.5 rounded bg-gold-400 text-emerald-950 font-extrabold uppercase leading-none shrink-0">${nextBadge}</span>` : '<span class="text-[9px] text-amber-200/40 font-mono shrink-0">AST</span>'}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        if (window.lucide) window.lucide.createIcons();
+      }
+
+      function switchIbadahDhikrTab(tabKey) {
+        currentIbadahDhikrTab = tabKey;
+        const tabs = ['wirid', 'sayyidul', 'masjid', 'ayatkursi'];
+        tabs.forEach(t => {
+          const btn = document.getElementById(`dhikr-tab-${t}`);
+          if (btn) {
+            if (t === tabKey) {
+              btn.className = "px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-bold transition bg-gold-500 text-emerald-950 shadow whitespace-nowrap";
+            } else {
+              btn.className = "px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-medium text-amber-200/70 hover:text-white hover:bg-emerald-900/40 transition whitespace-nowrap";
+            }
+          }
+        });
+        renderIbadahDhikr();
+      }
+
+      function incrementTasbih(type) {
+        if (!tasbihCounts[type]) tasbihCounts[type] = 0;
+        if (tasbihCounts[type] < 33) {
+          tasbihCounts[type]++;
+        } else {
+          tasbihCounts[type] = 0;
+        }
+        renderIbadahDhikr();
+      }
+
+      function resetTasbih(type) {
+        tasbihCounts[type] = 0;
+        renderIbadahDhikr();
+      }
+
+      function renderIbadahDhikr() {
+        const container = document.getElementById('ibadah-dhikr-content');
+        if (!container) return;
+        const isEn = currentLang === 'en';
+
+        if (currentIbadahDhikrTab === 'wirid') {
+          const sCount = tasbihCounts.subhanallah || 0;
+          const aCount = tasbihCounts.alhamdulillah || 0;
+          const akCount = tasbihCounts.allahuakbar || 0;
+
+          container.innerHTML = `
+            <!-- 1. Istighfar 3x & Salam -->
+            <div class="p-4 rounded-2xl bg-black/40 border border-gold-500/25 space-y-2">
+              <div class="flex items-center justify-between text-xs text-gold-400 font-bold">
+                <span>1. Istighfar & Doa Keselamatan (3x)</span>
+                <span class="text-[11px] text-amber-200/60">Dibaca sesudah salam</span>
+              </div>
+              <p class="font-arabic text-xl sm:text-2xl text-white text-right leading-loose tracking-wide py-1">
+                أَسْتَغْفِرُ اللهَ الْعَظِيمَ الَّذِي لاَ إِلَهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ
+              </p>
+              <p class="font-arabic text-xl sm:text-2xl text-white text-right leading-loose tracking-wide py-1">
+                اللَّهُمَّ أَنْتَ السَّلاَمُ وَمِنْكَ السَّلاَمُ تَبَارَكْتَ يَا ذَا الْجَلاَلِ وَالإِكْرَامِ
+              </p>
+              <p class="text-xs text-amber-100/80 italic">
+                "${isEn ? 'I seek forgiveness from Allah the Almighty. O Allah, You are Peace and from You is all peace. Blessed are You, O Owner of Majesty and Honor.' : 'Aku memohon ampun kepada Allah Yang Maha Agung. Ya Allah, Engkaulah As-Salam (Pemberi Keselamatan) dan dari-Mu keselamatan, Maha Berkah Engkau Wahai Pemilik Keagungan dan Kemuliaan.'}"
+              </p>
+            </div>
+
+            <!-- 2. Interactive Digital Tasbih 33x Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              
+              <!-- Subhanallah -->
+              <div class="p-4 rounded-2xl bg-black/40 border ${sCount >= 33 ? 'border-emerald-400 bg-emerald-950/30' : 'border-gold-500/25'} flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between text-xs mb-1">
+                    <span class="font-bold text-gold-300">Subhanallah (33x)</span>
+                    <span class="font-mono font-black text-sm ${sCount >= 33 ? 'text-emerald-400' : 'text-white'}">${sCount} / 33</span>
+                  </div>
+                  <p class="font-arabic text-2xl text-white text-center py-2">سُبْحَانَ اللهِ</p>
+                </div>
+                <div class="flex items-center gap-2 mt-2">
+                  <button onclick="incrementTasbih('subhanallah')" class="flex-1 py-2 px-3 rounded-xl bg-gold-500/20 hover:bg-gold-500/30 text-gold-200 border border-gold-500/40 text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer">
+                    <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-gold-400"></i>
+                    <span>${sCount >= 33 ? (isEn ? 'Completed ✓' : 'Selesai ✓') : (isEn ? 'Tap +1' : 'Ketuk +1')}</span>
+                  </button>
+                  <button onclick="resetTasbih('subhanallah')" class="p-2 rounded-xl bg-emerald-950/80 hover:bg-emerald-900 text-amber-200/60 hover:text-white border border-gold-500/20 text-xs transition cursor-pointer" title="Reset">
+                    <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Alhamdulillah -->
+              <div class="p-4 rounded-2xl bg-black/40 border ${aCount >= 33 ? 'border-emerald-400 bg-emerald-950/30' : 'border-gold-500/25'} flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between text-xs mb-1">
+                    <span class="font-bold text-gold-300">Alhamdulillah (33x)</span>
+                    <span class="font-mono font-black text-sm ${aCount >= 33 ? 'text-emerald-400' : 'text-white'}">${aCount} / 33</span>
+                  </div>
+                  <p class="font-arabic text-2xl text-white text-center py-2">الْحَمْدُ لِلَّهِ</p>
+                </div>
+                <div class="flex items-center gap-2 mt-2">
+                  <button onclick="incrementTasbih('alhamdulillah')" class="flex-1 py-2 px-3 rounded-xl bg-gold-500/20 hover:bg-gold-500/30 text-gold-200 border border-gold-500/40 text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer">
+                    <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-gold-400"></i>
+                    <span>${aCount >= 33 ? (isEn ? 'Completed ✓' : 'Selesai ✓') : (isEn ? 'Tap +1' : 'Ketuk +1')}</span>
+                  </button>
+                  <button onclick="resetTasbih('alhamdulillah')" class="p-2 rounded-xl bg-emerald-950/80 hover:bg-emerald-900 text-amber-200/60 hover:text-white border border-gold-500/20 text-xs transition cursor-pointer" title="Reset">
+                    <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Allahu Akbar -->
+              <div class="p-4 rounded-2xl bg-black/40 border ${akCount >= 33 ? 'border-emerald-400 bg-emerald-950/30' : 'border-gold-500/25'} flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between text-xs mb-1">
+                    <span class="font-bold text-gold-300">Allahu Akbar (33x)</span>
+                    <span class="font-mono font-black text-sm ${akCount >= 33 ? 'text-emerald-400' : 'text-white'}">${akCount} / 33</span>
+                  </div>
+                  <p class="font-arabic text-2xl text-white text-center py-2">اللهُ أَكْبَرُ</p>
+                </div>
+                <div class="flex items-center gap-2 mt-2">
+                  <button onclick="incrementTasbih('allahuakbar')" class="flex-1 py-2 px-3 rounded-xl bg-gold-500/20 hover:bg-gold-500/30 text-gold-200 border border-gold-500/40 text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer">
+                    <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-gold-400"></i>
+                    <span>${akCount >= 33 ? (isEn ? 'Completed ✓' : 'Selesai ✓') : (isEn ? 'Tap +1' : 'Ketuk +1')}</span>
+                  </button>
+                  <button onclick="resetTasbih('allahuakbar')" class="p-2 rounded-xl bg-emerald-950/80 hover:bg-emerald-900 text-amber-200/60 hover:text-white border border-gold-500/20 text-xs transition cursor-pointer" title="Reset">
+                    <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- 3. Penyempurna Wirid (Tahlil 100x) -->
+            <div class="p-4 rounded-2xl bg-black/40 border border-gold-500/25 space-y-2">
+              <div class="flex items-center justify-between text-xs text-gold-400 font-bold">
+                <span>3. Penyempurna Dzikir Ke-100</span>
+                <span class="text-[11px] text-amber-200/60">HR. Muslim no. 597</span>
+              </div>
+              <p class="font-arabic text-xl sm:text-2xl text-white text-right leading-loose tracking-wide py-1">
+                لاَ إِلَهَ إِلاَّ اللهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ
+              </p>
+              <p class="text-xs text-amber-100/80 italic">
+                "${isEn ? 'None has the right to be worshipped except Allah alone, without partner, to Him belongs the Kingdom and all praises, and He is over all things Able.' : 'Tiada ilah yang berhak disembah selain Allah semata, tiada sekutu bagi-Nya. Bagi-Nya segala kerajaan dan bagi-Nya segala pujian, dan Dia Maha Kuasa atas segala sesuatu.'}"
+              </p>
+            </div>
+          `;
+        } else if (currentIbadahDhikrTab === 'sayyidul') {
+          container.innerHTML = `
+            <div class="p-5 rounded-2xl bg-black/40 border border-gold-500/25 space-y-3">
+              <div class="flex items-center justify-between text-xs text-gold-400 font-bold border-b border-gold-500/20 pb-2">
+                <span class="text-sm">Sayyidul Istighfar (Penghulu Segala Doa Taubat)</span>
+                <span class="text-[11px] text-emerald-400 font-semibold">HR. Bukhari no. 6306</span>
+              </div>
+              <p class="font-arabic text-xl sm:text-2xl text-white text-right leading-loose tracking-wide py-2">
+                اللَّهُمَّ أَنْتَ رَبِّي لاَ إِلَهَ إِلاَّ أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ لَكَ بِذَنْبِي فَاغْفِرْ لِي، فَإِنَّهُ لاَ يَغْفِرُ الذُّنُوبَ إِلاَّ أَنْتَ
+              </p>
+              <div class="p-3 rounded-xl bg-emerald-950/60 border border-gold-500/20 text-xs text-amber-100/90 leading-relaxed space-y-1.5">
+                <p class="font-semibold text-gold-300">Artinya:</p>
+                <p class="italic">
+                  "${isEn 
+                    ? 'O Allah, You are my Lord, none has the right to be worshipped but You. You created me and I am Your servant, and I abide by Your covenant and promise as best as I can. I seek refuge in You from the evil of what I have done. I acknowledge Your favor upon me and I acknowledge my sin, so forgive me, for none forgives sins except You.' 
+                    : 'Ya Allah, Engkaulah Tuhanku, tiada tuhan selain Engkau. Engkau yang menciptakan aku dan aku adalah hamba-Mu. Aku memegang teguh perjanjian dan janji-Mu semampuku. Aku berlindung kepada-Mu dari keburukan yang telah kuperbuat. Aku mengakui segala nikmat-Mu kepadaku dan aku mengakui segala dosaku, maka ampunilah aku, sesungguhnya tiada yang dapat mengampuni dosa selain Engkau.'}"
+                </p>
+              </div>
+              <div class="flex items-center gap-2 text-[11px] text-gold-400/90 pt-1">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-gold-400 shrink-0"></i>
+                <span>Keutamaan: Siapa membacanya di pagi/petang hari dengan penuh keyakinan dan wafat pada hari itu, niscaya termasuk penghuni surga.</span>
+              </div>
+            </div>
+          `;
+        } else if (currentIbadahDhikrTab === 'masjid') {
+          container.innerHTML = `
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Doa Masuk Masjid -->
+              <div class="p-4 rounded-2xl bg-black/40 border border-gold-500/25 space-y-2">
+                <div class="flex items-center justify-between text-xs text-gold-400 font-bold border-b border-gold-500/20 pb-1.5">
+                  <span>Doa Masuk Masjid</span>
+                  <span class="text-[10px] text-amber-200/60">Mendahulukan Kaki Kanan</span>
+                </div>
+                <p class="font-arabic text-xl sm:text-2xl text-white text-right leading-loose py-1">
+                  اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ
+                </p>
+                <p class="text-xs text-amber-100/80 italic">
+                  "${isEn ? 'O Allah, open for me the gates of Your mercy.' : 'Ya Allah, bukakanlah untukku pintu-pintu rahmat-Mu.'}"
+                </p>
+                <p class="text-[11px] text-emerald-400 font-mono pt-1">HR. Muslim no. 713</p>
+              </div>
+
+              <!-- Doa Keluar Masjid -->
+              <div class="p-4 rounded-2xl bg-black/40 border border-gold-500/25 space-y-2">
+                <div class="flex items-center justify-between text-xs text-gold-400 font-bold border-b border-gold-500/20 pb-1.5">
+                  <span>Doa Keluar Masjid</span>
+                  <span class="text-[10px] text-amber-200/60">Mendahulukan Kaki Kiri</span>
+                </div>
+                <p class="font-arabic text-xl sm:text-2xl text-white text-right leading-loose py-1">
+                  اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ
+                </p>
+                <p class="text-xs text-amber-100/80 italic">
+                  "${isEn ? 'O Allah, I ask You from Your bounty and favor.' : 'Ya Allah, sesungguhnya aku memohon keutamaan dan karunia dari-Mu.'}"
+                </p>
+                <p class="text-[11px] text-emerald-400 font-mono pt-1">HR. Muslim no. 713</p>
+              </div>
+            </div>
+
+            <!-- Adab Masuk Masjidil Haram & Raudhah -->
+            <div class="p-4 rounded-2xl bg-emerald-950/60 border border-gold-500/25 space-y-2 text-xs">
+              <h5 class="font-bold text-gold-300 flex items-center gap-2">
+                <i data-lucide="heart-handshake" class="w-4 h-4 text-gold-400"></i>
+                <span>Adab & Sunnah Masuk Masjid Suci:</span>
+              </h5>
+              <ul class="space-y-1.5 text-amber-100/80 list-disc list-inside">
+                <li>Melangkahkan kaki kanan terlebih dahulu sambil melantunkan shalawat & doa masuk masjid.</li>
+                <li>Mendirikan shalat sunnah Tahiyyatul Masjid 2 rakaat sebelum duduk (di Masjidil Haram, disunnahkan Thawaf Qudum/Sunnah jika memungkinkan).</li>
+                <li>Menjaga adab berpakaian sopan, bersih, harum, serta merendahkan nada suara demi kenyamanan ibadah sesama jamaah.</li>
+              </ul>
+            </div>
+          `;
+        } else if (currentIbadahDhikrTab === 'ayatkursi') {
+          container.innerHTML = `
+            <div class="p-5 rounded-2xl bg-black/40 border border-gold-500/25 space-y-3">
+              <div class="flex items-center justify-between text-xs text-gold-400 font-bold border-b border-gold-500/20 pb-2">
+                <span class="text-sm">Ayat Al-Kursi (QS. Al-Baqarah [2:255])</span>
+                <span class="text-[11px] text-emerald-400 font-semibold">Ayat Teragung dalam Al-Qur'an</span>
+              </div>
+              <p class="font-arabic text-xl sm:text-2xl text-white text-right leading-loose tracking-wide py-2">
+                اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ
+              </p>
+              <div class="p-3 rounded-xl bg-emerald-950/60 border border-gold-500/20 text-xs text-amber-100/90 leading-relaxed space-y-1.5">
+                <p class="font-semibold text-gold-300">Terjemahan:</p>
+                <p class="italic">
+                  "${isEn 
+                    ? 'Allah! There is no deity except Him, the Ever-Living, the Sustainer of all existence. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursi extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Most Great.' 
+                    : 'Allah, tidak ada tuhan selain Dia. Yang Mahahidup, Yang terus menerus mengurus (makhluk-Nya), tidak mengantuk dan tidak tidur. Milik-Nya apa yang ada di langit dan apa yang ada di bumi. Tidak ada yang dapat memberi syafaat di sisi-Nya tanpa izin-Nya. Dia mengetahui apa yang ada di hadapan mereka dan apa yang ada di belakang mereka, dan mereka tidak mengetahui sesuatu apa pun tentang ilmu-Nya melainkan apa yang Dia kehendaki. Kursi-Nya meliputi langit dan bumi. Dan Dia tidak merasa berat memelihara keduanya, dan Dia Mahatinggi, Mahabesar.'}"
+                </p>
+              </div>
+              <div class="flex items-center gap-2 text-[11px] text-gold-400/90 pt-1">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400 shrink-0"></i>
+                <span>Keutamaan: Siapa membaca Ayat Kursi setiap selesai shalat fardhu, tidak ada yang menghalanginya masuk surga selain kematian (HR. An-Nasa'i).</span>
+              </div>
+            </div>
+          `;
+        }
+
+        if (window.lucide) window.lucide.createIcons();
       }
 
       function updateStreamInfo() {
@@ -5561,6 +6182,14 @@
       window.watchMosqueLiveStream = watchMosqueLiveStream;
       window.updateHaramainRealtimeConditions = updateHaramainRealtimeConditions;
       window.getHaramainRealtimeCondition = getHaramainRealtimeCondition;
+      window.toggleIbadahMode = toggleIbadahMode;
+      window.switchIbadahCity = switchIbadahCity;
+      window.toggleIbadahDimDepth = toggleIbadahDimDepth;
+      window.switchIbadahDhikrTab = switchIbadahDhikrTab;
+      window.incrementTasbih = incrementTasbih;
+      window.resetTasbih = resetTasbih;
+      window.renderIbadahDhikr = renderIbadahDhikr;
+      window.renderIbadahPrayerGrid = renderIbadahPrayerGrid;
 
       /* =========================================================================
          SCROLL-REVEAL OBSERVER
@@ -5901,6 +6530,7 @@
         // Modal event listeners (Escape key & backdrop click)
         document.addEventListener('keydown', (e) => {
           if (e.key === 'Escape') {
+            if (isIbadahModeOpen) toggleIbadahMode(false);
             if (isMosqueModalOpen) closeMosqueModal();
             closeNotice();
           }
