@@ -1131,14 +1131,15 @@
 
     <!-- DAILY IMAM SCHEDULE SECTION -->
     <section id="daily-imams" class="py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 reveal-on-scroll">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4 reveal-on-scroll">
         <div>
-          <div class="flex items-center gap-2 text-xs font-semibold text-gold-400 uppercase tracking-widest mb-1">
-            <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+          <div class="flex flex-wrap items-center gap-2 text-xs font-semibold text-gold-400 uppercase tracking-widest mb-1.5">
+            <i data-lucide="book-open" class="w-3.5 h-3.5 text-gold-400"></i>
             <span data-i18n="imams_badge">Jadwal Resmi Presidensi Haramain</span>
+            <span class="px-2 py-0.5 rounded bg-gold-500/15 border border-gold-500/30 text-[10px] text-gold-300 font-mono lowercase tracking-normal">9 – 15 Rabi'ul Akhir 1448 H</span>
           </div>
           <h2 class="text-2xl sm:text-4xl font-serif font-bold text-white" data-i18n="imams_heading">Jadwal Imam Bertugas Hari Ini</h2>
-          <p class="text-sm text-amber-100/60 mt-1" data-i18n="imams_desc">Daftar Syekh yang ditugaskan memimpin shalat berjamaah lima waktu hari ini.</p>
+          <p class="text-sm text-amber-100/70 mt-1" data-i18n="imams_desc">Daftar Syekh yang ditugaskan memimpin shalat berjamaah lima waktu beserta Imam Cadangan (الاحتياطي).</p>
         </div>
 
         <!-- Mosque Switcher for Imams -->
@@ -1162,14 +1163,15 @@
     <section id="daily-muadzins" class="py-14 bg-gradient-to-b from-[#031c19] via-emerald-950/70 to-[#031c19] border-t border-gold-500/20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 reveal-on-scroll">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4 reveal-on-scroll">
           <div>
-            <div class="flex items-center gap-2 text-xs font-semibold text-gold-400 uppercase tracking-widest mb-1">
-              <i data-lucide="mic" class="w-3.5 h-3.5"></i>
+            <div class="flex flex-wrap items-center gap-2 text-xs font-semibold text-gold-400 uppercase tracking-widest mb-1.5">
+              <i data-lucide="mic" class="w-3.5 h-3.5 text-gold-400"></i>
               <span data-i18n="muadzins_badge">Suara dari Menara Suci</span>
+              <span class="px-2 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/30 text-[10px] text-emerald-300 font-mono tracking-normal">Pekan 09 – 15 Rabi'uts Tsani 1448 H</span>
             </div>
             <h2 class="text-2xl sm:text-4xl font-bold text-white tracking-tight" data-i18n="muadzins_heading">Jadwal Muadzin Bertugas Hari Ini</h2>
-            <p class="text-sm text-amber-100/60 mt-1" data-i18n="muadzins_desc">Para muadzin mulia pengumandang Adzan dan Iqamah di kedua masjid suci.</p>
+            <p class="text-sm text-amber-100/70 mt-1" data-i18n="muadzins_desc">Para muadzin mulia pengumandang Adzan 1 & 2 serta Iqamah di menara-menara suci.</p>
           </div>
 
           <!-- Mosque Switcher for Muadzins -->
@@ -1183,8 +1185,22 @@
           </div>
         </div>
 
+        <!-- Weekly Day Selector for Muadzins (Available for both Makkah & Madinah) -->
+        <div id="muadzin-day-picker-wrap" class="mb-6 p-3 sm:p-4 rounded-2xl bg-[#021814]/90 border border-emerald-500/30 shadow-inner">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-3">
+            <div class="flex items-center gap-2 text-xs font-bold text-gold-300">
+              <i data-lucide="calendar" class="w-4 h-4 text-emerald-400"></i>
+              <span id="muadzin-picker-title">Pilih Hari Penugasan Muadzin:</span>
+            </div>
+            <span class="text-[11px] text-amber-200/60 font-mono">Tabel Resmi: 09 – 15 Rabi'uts Tsani 1448 H</span>
+          </div>
+          <div id="muadzin-days-btn-group" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
         <!-- Muadzins Table / Cards with Smooth Transition -->
-        <div id="muadzins-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 transition-all duration-300 min-h-[160px] reveal-on-scroll reveal-delay-1">
+        <div id="muadzins-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 transition-all duration-300 min-h-[160px] reveal-on-scroll reveal-delay-1">
           <!-- Rendered dynamically via JavaScript -->
         </div>
 
@@ -2270,92 +2286,102 @@
 
       let currentStream = 'makkah';
 
-      // Daily Imams schedule
+      // Daily Imams schedule (Pekan: 9 - 15 Rabi'ul Akhir 1448 H / 1446 H)
       const imamData = {
         makkah: [
           {
             prayerKey: "fajr",
-            name: "Syekh Dr. Bandar Baleelah",
-            arabic: "الشيخ د. بندر بليلة",
+            name: "Syekh Prof. Dr. Maher Al-Muaiqly",
+            arabic: "فضيلة الشيخ أ.د. ماهر بن حمد المعيقلي",
+            backupName: "Syekh Dr. Bandar Baleelah",
+            backupArabic: "فضيلة الشيخ د. بندر بن عبدالعزيز بليلة",
             role: {
-              id: "Imam & Khatib • Anggota Dewan Ulama Senior Arab Saudi",
-              en: "Imam & Khateeb • Member of Council of Senior Scholars Saudi Arabia"
+              id: "Imam Shalat Subuh • Imam & Khatib Masjidil Haram",
+              en: "Fajr Prayer Imam • Imam & Khateeb of Masjidil Haram"
             },
             bio: {
-              id: "Dikenal dengan lantunan tilawah yang syahdu dan tenang dalam langgam Maqam Hijazi.",
-              en: "Renowned for serene, tranquil Quranic recitations in the traditional Hijazi Maqam."
+              id: "Imam Utama Shalat Subuh. Memiliki suara emas yang syahdu dan menggetarkan hati ribuan jamaah di hadapan Ka'bah.",
+              en: "Primary Fajr Imam. Renowned for soulful, deeply moving recitation in front of the Holy Kaaba."
             },
             tag: {
-              id: "Imam Shalat Subuh",
-              en: "Fajr Prayer Imam"
+              id: "Imam Subuh Utama",
+              en: "Primary Fajr Imam"
             }
           },
           {
             prayerKey: "dhuhr",
-            name: "Syekh Dr. Maher Al-Muaiqly",
-            arabic: "الشيخ د. ماهر المعيقلي",
+            name: "Syekh Dr. Bandar Baleelah",
+            arabic: "فضيلة الشيخ د. بندر بن عبدالعزيز بليلة",
+            backupName: "Syekh Dr. Al-Waleed Asy-Syamsan",
+            backupArabic: "فضيلة الشيخ د. الوليد بن خالد الشمسان",
             role: {
-              id: "Imam & Khatib Masjidil Haram",
-              en: "Imam & Khateeb of Masjidil Haram"
+              id: "Imam Shalat Dzuhur • Anggota Dewan Ulama Senior",
+              en: "Dhuhr Prayer Imam • Senior Scholars Council"
             },
             bio: {
-              id: "Masyhur di seluruh dunia Islam dengan suaranya yang merdu, khusyuk, dan menggetarkan hati.",
-              en: "Celebrated across the Muslim world for his melodious, deeply moving Quranic recitations."
+              id: "Imam Utama Shalat Dzuhur. Karakter tilawah yang tenang, tertib, dan menghadirkan ketenteraman batin di waktu siang.",
+              en: "Primary Dhuhr Imam. Serene, dignified recitation instilling peaceful devotion."
             },
             tag: {
-              id: "Imam Shalat Dzuhur",
-              en: "Dhuhr Prayer Imam"
+              id: "Imam Dzuhur Utama",
+              en: "Primary Dhuhr Imam"
             }
           },
           {
             prayerKey: "asr",
-            name: "Syekh Dr. Abdullah Juhany",
-            arabic: "الشيخ د. عبد الله الجهني",
+            name: "Syekh Dr. Al-Waleed Asy-Syamsan",
+            arabic: "فضيلة الشيخ د. الوليد بن خالد الشمسان",
+            backupName: "Syekh Prof. Dr. Maher Al-Muaiqly",
+            backupArabic: "فضيلة الشيخ أ.د. ماهر بن حمد المعيقلي",
             role: {
-              id: "Imam Masjidil Haram",
-              en: "Imam of Masjidil Haram"
+              id: "Imam Shalat Ashar • Imam Masjidil Haram & Pakar Qira'at",
+              en: "Asr Prayer Imam • Imam of Masjidil Haram & Qira'at Scholar"
             },
             bio: {
-              id: "Ulama pakar tajwid terkemuka dengan kefasihan makhraj dan ketukan irama tilawah yang khas.",
-              en: "Distinguished Tajweed scholar with pristine pronunciation and captivating rhythm."
+              id: "Imam Utama Shalat Ashar. Dosen Ilmu Qira'at Umm Al-Qura dengan artikulasi tajwid yang mutqin dan bacaan yang teduh.",
+              en: "Primary Asr Imam. Master of Quranic recitation with pristine tajweed and tranquil cadence."
             },
             tag: {
-              id: "Imam Shalat Ashar",
-              en: "Asr Prayer Imam"
+              id: "Imam Ashar Utama",
+              en: "Primary Asr Imam"
             }
           },
           {
             prayerKey: "maghrib",
-            name: "Syekh Dr. Yasser Al-Dossary",
-            arabic: "الشيخ د. ياسر الدوسري",
+            name: "Syekh Dr. Al-Waleed Asy-Syamsan",
+            arabic: "فضيلة الشيخ د. الوليد بن خالد الشمسان",
+            backupName: "Syekh Prof. Dr. Maher Al-Muaiqly",
+            backupArabic: "فضيلة الشيخ أ.د. ماهر بن حمد المعيقلي",
             role: {
-              id: "Imam & Khatib Masjidil Haram",
-              en: "Imam & Khateeb of Masjidil Haram"
+              id: "Imam Shalat Maghrib • Imam Masjidil Haram & Pakar Qira'at",
+              en: "Maghrib Prayer Imam • Imam of Masjidil Haram & Qira'at Scholar"
             },
             bio: {
-              id: "Suara lantang nan haru yang menyentuh jiwa saat memimpin ribuan jamaah di pelataran Ka'bah.",
-              en: "Resonant, soul-stirring voice leading thousands of worshippers around the Kaaba."
+              id: "Imam Utama Shalat Maghrib. Lantunan ayat-ayat suci yang khusyuk dan menggetarkan saat senja di pelataran Ka'bah.",
+              en: "Primary Maghrib Imam. Evocative sunset recitation resonating throughout the Grand Mosque."
             },
             tag: {
-              id: "Imam Shalat Maghrib",
-              en: "Maghrib Prayer Imam"
+              id: "Imam Maghrib Utama",
+              en: "Primary Maghrib Imam"
             }
           },
           {
             prayerKey: "isha",
-            name: "Syekh Dr. Abdul Rahman Al-Sudais",
-            arabic: "الشيخ د. عبد الرحمن السديس",
+            name: "Syekh Dr. Bandar Baleelah",
+            arabic: "فضيلة الشيخ د. بندر بن عبدالعزيز بليلة",
+            backupName: "Syekh Dr. Al-Waleed Asy-Syamsan",
+            backupArabic: "فضيلة الشيخ د. الوليد بن خالد الشمسان",
             role: {
-              id: "Ketua Umum Otoritas Urusan Dua Masjid Suci",
-              en: "President of Religious Affairs of the Two Holy Mosques"
+              id: "Imam Shalat Isya • Anggota Dewan Ulama Senior",
+              en: "Isha Prayer Imam • Senior Scholars Council"
             },
             bio: {
-              id: "Memimpin shalat di depan Ka'bah selama lebih dari 40 tahun; suara legendaris dunia Islam.",
-              en: "Leading prayers before the Kaaba for over 40 years; a legendary voice of the Islamic world."
+              id: "Imam Utama Shalat Isya. Memimpin ribuan jamaah shalat Isya dan doa witir dengan kekhusyukan tinggi di Masjidil Haram.",
+              en: "Primary Isha Imam. Leads evening congregational prayer with profound serenity at the Kaaba."
             },
             tag: {
-              id: "Imam Shalat Isya & Witir",
-              en: "Isha & Witr Prayer Imam"
+              id: "Imam Isya Utama",
+              en: "Primary Isha Imam"
             }
           }
         ],
@@ -2363,7 +2389,9 @@
           {
             prayerKey: "fajr",
             name: "Syekh Dr. Ali Al-Hudhaify",
-            arabic: "الشيخ د. علي الحذيفي",
+            arabic: "فضيلة الشيخ د. علي بن عبدالرحمن الحذيفي",
+            backupName: "Syekh Dr. Ahmad Al-Hudaify",
+            backupArabic: "فضيلة الشيخ د. أحمد بن علي الحذيفي",
             role: {
               id: "Imam Tertua & Senior Masjid Nabawi",
               en: "Senior Head Imam of Al-Masjid An-Nabawi"
@@ -2373,14 +2401,16 @@
               en: "Grand scholar of Qira'at; leading prayers at the Prophet's Mosque since 1399 AH."
             },
             tag: {
-              id: "Imam Shalat Subuh",
-              en: "Fajr Prayer Imam"
+              id: "Imam Subuh Masjid Nabawi",
+              en: "Fajr Imam Prophet's Mosque"
             }
           },
           {
             prayerKey: "dhuhr",
             name: "Syekh Dr. Abdul Mohsen Al-Qasim",
-            arabic: "الشيخ د. عبد المحسن القاسم",
+            arabic: "فضيلة الشيخ د. عبدالمحسن بن محمد القاسم",
+            backupName: "Syekh Dr. Salah Al-Budair",
+            backupArabic: "فضيلة الشيخ د. صلاح بن محمد البدير",
             role: {
               id: "Imam & Khatib • Hakim Mahkamah Banding Madinah",
               en: "Imam & Khateeb • Madinah Court of Appeal Judge"
@@ -2390,14 +2420,16 @@
               en: "Prominent scholar who compiled the international Mutun & Quran memorization syllabus."
             },
             tag: {
-              id: "Imam Shalat Dzuhur",
-              en: "Dhuhr Prayer Imam"
+              id: "Imam Dzuhur Masjid Nabawi",
+              en: "Dhuhr Imam Prophet's Mosque"
             }
           },
           {
             prayerKey: "asr",
             name: "Syekh Dr. Salah Al-Budair",
-            arabic: "الشيخ د. صلاح البدير",
+            arabic: "فضيلة الشيخ د. صلاح بن محمد البدير",
+            backupName: "Syekh Dr. Khalid Al-Muhanna",
+            backupArabic: "فضيلة الشيخ د. خالد بن سليمان المهنا",
             role: {
               id: "Imam & Khatib Masjid Nabawi",
               en: "Imam & Khateeb of Al-Masjid An-Nabawi"
@@ -2407,31 +2439,35 @@
               en: "Celebrated for remarkably serene, clear, and contemplative Quranic recitation."
             },
             tag: {
-              id: "Imam Shalat Ashar",
-              en: "Asr Prayer Imam"
+              id: "Imam Ashar Masjid Nabawi",
+              en: "Asr Imam Prophet's Mosque"
             }
           },
           {
             prayerKey: "maghrib",
             name: "Syekh Dr. Khalid Al-Muhanna",
-            arabic: "الشيخ د. خالد المهنا",
+            arabic: "فضيلة الشيخ د. خالد بن سليمان المهنا",
+            backupName: "Syekh Dr. Ahmad Al-Hudaify",
+            backupArabic: "فضيلة الشيخ د. أحمد بن علي الحذيفي",
             role: {
-              id: "Imam Masjid Nabawi",
-              en: "Imam of Al-Masjid An-Nabawi"
+              id: "Imam Masjid Nabawi & Profesor Hadits",
+              en: "Imam of Al-Masjid An-Nabawi & Hadith Professor"
             },
             bio: {
               id: "Profesor bidang ilmu Hadits Nabawi dan pengajar keilmuan Sunnah di Raudhah Syarifah.",
               en: "Professor of Prophetic Hadith Sciences teaching regularly in the noble Rawdah."
             },
             tag: {
-              id: "Imam Shalat Maghrib",
-              en: "Maghrib Prayer Imam"
+              id: "Imam Maghrib Masjid Nabawi",
+              en: "Maghrib Imam Prophet's Mosque"
             }
           },
           {
             prayerKey: "isha",
             name: "Syekh Dr. Ahmad Al-Hudaify",
-            arabic: "الشيخ د. أحمد الحذيفي",
+            arabic: "فضيلة الشيخ د. أحمد بن علي الحذيفي",
+            backupName: "Syekh Dr. Ali Al-Hudhaify",
+            backupArabic: "فضيلة الشيخ د. علي بن عبدالرحمن الحذيفي",
             role: {
               id: "Imam & Khatib Masjid Nabawi",
               en: "Imam & Khateeb of Al-Masjid An-Nabawi"
@@ -2441,8 +2477,8 @@
               en: "Carrier of classic Madani recitation traditions, noted for gentle elegance and devotion."
             },
             tag: {
-              id: "Imam Shalat Isya",
-              en: "Isha Prayer Imam"
+              id: "Imam Isya Masjid Nabawi",
+              en: "Isha Imam Prophet's Mosque"
             }
           }
         ]
@@ -2450,25 +2486,212 @@
 
       let currentImamMosque = 'makkah';
 
-      // Daily Muadzins schedule
-      const muadzinData = {
-        makkah: [
-          { prayerKey: "fajr", name: "Syekh Ali Ahmed Mullah", arabic: "الشيخ علي أحمد ملا", maqam: "Hijaz", title: { id: "Syekh Para Muadzin (Bilal Al-Haram)", en: "Chief of Muadzins (Bilal of the Sanctuary)" } },
-          { prayerKey: "dhuhr", name: "Syekh Nayef Saleh Feidah", arabic: "الشيخ نايف صالح فيدة", maqam: "Bayati", title: { id: "Muadzin Senior Masjidil Haram", en: "Senior Muadzin of Masjidil Haram" } },
-          { prayerKey: "asr", name: "Syekh Hashim Saqa", arabic: "الشيخ هاشم السقا", maqam: "Sikah", title: { id: "Muadzin Resmi Masjidil Haram", en: "Official Muadzin of Masjidil Haram" } },
-          { prayerKey: "maghrib", name: "Syekh Issam Khan", arabic: "الشيخ عصام خان", maqam: "Rast", title: { id: "Muadzin Senior Masjidil Haram", en: "Senior Muadzin of Masjidil Haram" } },
-          { prayerKey: "isha", name: "Syekh Suhail Hafiz", arabic: "الشيخ سهيل حافظ", maqam: "Nahawand", title: { id: "Muadzin Resmi Masjidil Haram", en: "Official Muadzin of Masjidil Haram" } }
-        ],
-        madinah: [
-          { prayerKey: "fajr", name: "Syekh Anas Sharif", arabic: "الشيخ أنس الشريف", maqam: "Hijaz", title: { id: "Muadzin Senior Masjid Nabawi", en: "Senior Muadzin of Al-Masjid An-Nabawi" } },
-          { prayerKey: "dhuhr", name: "Syekh Abdul Majeed Surayhi", arabic: "الشيخ عبد المجيد السريحي", maqam: "Bayati", title: { id: "Muadzin Resmi Masjid Nabawi", en: "Official Muadzin of Al-Masjid An-Nabawi" } },
-          { prayerKey: "asr", name: "Syekh Iyad Shukri", arabic: "الشيخ إياد شكري", maqam: "Sikah", title: { id: "Muadzin Menara Kenabian", en: "Muadzin of the Prophetic Minaret" } },
-          { prayerKey: "maghrib", name: "Syekh Saud Bukhari", arabic: "الشيخ سعود بخاري", maqam: "Rast", title: { id: "Muadzin Senior Masjid Nabawi", en: "Senior Muadzin of Al-Masjid An-Nabawi" } },
-          { prayerKey: "isha", name: "Syekh Mahdi Barri", arabic: "الشيخ مهدي بري", maqam: "Nahawand", title: { id: "Muadzin Resmi Masjid Nabawi", en: "Official Muadzin of Al-Masjid An-Nabawi" } }
-        ]
+      // Official Weekly Muadzin Roster for Al-Masjid Al-Haram Makkah (9 - 15 Rabi'ul Akhir 1448 H)
+      const haramWeeklyMuadzins = {
+        ahad: {
+          key: "ahad",
+          dayName: { id: "Ahad", en: "Sunday" },
+          dateHijri: "09 Rabi'ul Akhir",
+          dateFull: "Ahad, 09 Rabi'ul Akhir 1448 H",
+          schedule: [
+            { prayerKey: "fajr1", time: "04:00", name: "Syekh Prof. Dr. Issam Khan", arabic: "الشيخ أ.د. عصام خان", maqam: "Hijaz", adhanType: { id: "Adzan 1 Subuh", en: "1st Fajr Adhan" }, iqamah: "04:20" },
+            { prayerKey: "fajr2", time: "04:55", name: "Syekh Abdullah Ba'afeef", arabic: "الشيخ عبدالله باعفيف", maqam: "Hijaz", adhanType: { id: "Adzan 2 Subuh", en: "2nd Fajr Adhan" }, iqamah: "05:20" },
+            { prayerKey: "dhuhr", time: "12:15", name: "Syekh Muhammad Basa'ad", arabic: "الشيخ محمد باسعد", maqam: "Bayati", adhanType: { id: "Adzan Dzuhur", en: "Dhuhr Adhan" }, iqamah: "12:35" },
+            { prayerKey: "asr", time: "15:40", name: "Syekh Hashim As-Saqqaf", arabic: "الشيخ هاشم السقاف", maqam: "Sikah", adhanType: { id: "Adzan Ashar", en: "Asr Adhan" }, iqamah: "16:00" },
+            { prayerKey: "maghrib", time: "18:18", name: "Syekh Hussain Syahat", arabic: "الشيخ حسين شحات", maqam: "Rast", adhanType: { id: "Adzan Maghrib", en: "Maghrib Adhan" }, iqamah: "18:28" },
+            { prayerKey: "isha", time: "19:48", name: "Syekh Ali Ahmed Mullah", arabic: "الشيخ علي ملا", maqam: "Nahawand", adhanType: { id: "Adzan Isya", en: "Isha Adhan" }, iqamah: "20:08" }
+          ]
+        },
+        senin: {
+          key: "senin",
+          dayName: { id: "Senin", en: "Monday" },
+          dateHijri: "10 Rabi'ul Akhir",
+          dateFull: "Senin, 10 Rabi'ul Akhir 1448 H",
+          schedule: [
+            { prayerKey: "fajr1", time: "04:00", name: "Syekh Sami Rayes", arabic: "الشيخ سامي ريس", maqam: "Hijaz", adhanType: { id: "Adzan 1 Subuh", en: "1st Fajr Adhan" }, iqamah: "04:20" },
+            { prayerKey: "fajr2", time: "04:55", name: "Syekh Ahmad Basnawi", arabic: "الشيخ أحمد بصنوي", maqam: "Hijaz", adhanType: { id: "Adzan 2 Subuh", en: "2nd Fajr Adhan" }, iqamah: "05:20" },
+            { prayerKey: "dhuhr", time: "12:15", name: "Syekh Dr. Majid Al-Abbas", arabic: "الشيخ د. ماجد العباس", maqam: "Bayati", adhanType: { id: "Adzan Dzuhur", en: "Dhuhr Adhan" }, iqamah: "12:35" },
+            { prayerKey: "asr", time: "15:40", name: "Syekh Sa'eed Fallatah", arabic: "الشيخ سعيد فلاته", maqam: "Sikah", adhanType: { id: "Adzan Ashar", en: "Asr Adhan" }, iqamah: "16:00" },
+            { prayerKey: "maghrib", time: "18:18", name: "Syekh Abdullah Ba'afeef", arabic: "الشيخ عبدالله باعفيف", maqam: "Rast", adhanType: { id: "Adzan Maghrib", en: "Maghrib Adhan" }, iqamah: "18:28" },
+            { prayerKey: "isha", time: "19:48", name: "Syekh Ahmad Khoujah", arabic: "الشيخ أحمد خوجة", maqam: "Nahawand", adhanType: { id: "Adzan Isya", en: "Isha Adhan" }, iqamah: "20:08" }
+          ]
+        },
+        selasa: {
+          key: "selasa",
+          dayName: { id: "Selasa", en: "Tuesday" },
+          dateHijri: "11 Rabi'ul Akhir",
+          dateFull: "Selasa, 11 Rabi'ul Akhir 1448 H",
+          schedule: [
+            { prayerKey: "fajr1", time: "04:00", name: "Syekh Sa'eed Fallatah", arabic: "الشيخ سعيد فلاته", maqam: "Hijaz", adhanType: { id: "Adzan 1 Subuh", en: "1st Fajr Adhan" }, iqamah: "04:20" },
+            { prayerKey: "fajr2", time: "04:55", name: "Syekh Turki Al-Hasani", arabic: "الشيخ تركي الحسني", maqam: "Hijaz", adhanType: { id: "Adzan 2 Subuh", en: "2nd Fajr Adhan" }, iqamah: "05:20" },
+            { prayerKey: "dhuhr", time: "12:15", name: "Syekh Abdullah Ba'afeef", arabic: "الشيخ عبدالله باعفيف", maqam: "Bayati", adhanType: { id: "Adzan Dzuhur", en: "Dhuhr Adhan" }, iqamah: "12:35" },
+            { prayerKey: "asr", time: "15:40", name: "Syekh Hamad Daghreeri", arabic: "الشيخ حمد دغريري", maqam: "Sikah", adhanType: { id: "Adzan Ashar", en: "Asr Adhan" }, iqamah: "16:00" },
+            { prayerKey: "maghrib", time: "18:18", name: "Syekh Nayef Feidah", arabic: "الشيخ نايف فيده", maqam: "Rast", adhanType: { id: "Adzan Maghrib", en: "Maghrib Adhan" }, iqamah: "18:28" },
+            { prayerKey: "isha", time: "19:48", name: "Syekh Hamad Daghreeri", arabic: "الشيخ حمد دغريري", maqam: "Nahawand", adhanType: { id: "Adzan Isya", en: "Isha Adhan" }, iqamah: "20:08" }
+          ]
+        },
+        rabu: {
+          key: "rabu",
+          dayName: { id: "Rabu", en: "Wednesday" },
+          dateHijri: "12 Rabi'ul Akhir",
+          dateFull: "Rabu, 12 Rabi'ul Akhir 1448 H",
+          schedule: [
+            { prayerKey: "fajr1", time: "04:00", name: "Syekh Hamad Daghreeri", arabic: "الشيخ حمد دغريري", maqam: "Hijaz", adhanType: { id: "Adzan 1 Subuh", en: "1st Fajr Adhan" }, iqamah: "04:20" },
+            { prayerKey: "fajr2", time: "04:55", name: "Syekh Suhail Hafiz", arabic: "الشيخ سهيل حافظ", maqam: "Hijaz", adhanType: { id: "Adzan 2 Subuh", en: "2nd Fajr Adhan" }, iqamah: "05:20" },
+            { prayerKey: "dhuhr", time: "12:15", name: "Syekh Suhail Hafiz", arabic: "الشيخ سهيل حافظ", maqam: "Bayati", adhanType: { id: "Adzan Dzuhur", en: "Dhuhr Adhan" }, iqamah: "12:35" },
+            { prayerKey: "asr", time: "15:40", name: "Syekh Dr. Majid Al-Abbas", arabic: "الشيخ د. ماجد العباس", maqam: "Sikah", adhanType: { id: "Adzan Ashar", en: "Asr Adhan" }, iqamah: "16:00" },
+            { prayerKey: "maghrib", time: "18:18", name: "Syekh Hashim As-Saqqaf", arabic: "الشيخ هاشم السقاف", maqam: "Rast", adhanType: { id: "Adzan Maghrib", en: "Maghrib Adhan" }, iqamah: "18:28" },
+            { prayerKey: "isha", time: "19:48", name: "Syekh Sa'eed Fallatah", arabic: "الشيخ سعيد فلاته", maqam: "Nahawand", adhanType: { id: "Adzan Isya", en: "Isha Adhan" }, iqamah: "20:08" }
+          ]
+        },
+        kamis: {
+          key: "kamis",
+          dayName: { id: "Kamis", en: "Thursday" },
+          dateHijri: "13 Rabi'ul Akhir",
+          dateFull: "Kamis, 13 Rabi'ul Akhir 1448 H",
+          schedule: [
+            { prayerKey: "fajr1", time: "04:00", name: "Syekh Ahmad Basnawi", arabic: "الشيخ أحمد بصنوي", maqam: "Hijaz", adhanType: { id: "Adzan 1 Subuh", en: "1st Fajr Adhan" }, iqamah: "04:20" },
+            { prayerKey: "fajr2", time: "04:55", name: "Syekh Hashim As-Saqqaf", arabic: "الشيخ هاشم السقاف", maqam: "Hijaz", adhanType: { id: "Adzan 2 Subuh", en: "2nd Fajr Adhan" }, iqamah: "05:20" },
+            { prayerKey: "dhuhr", time: "12:15", name: "Syekh Ahmad Nahhas", arabic: "الشيخ أحمد نحاس", maqam: "Bayati", adhanType: { id: "Adzan Dzuhur", en: "Dhuhr Adhan" }, iqamah: "12:35" },
+            { prayerKey: "asr", time: "15:40", name: "Syekh Nayef Feidah", arabic: "الشيخ نايف فيده", maqam: "Sikah", adhanType: { id: "Adzan Ashar", en: "Asr Adhan" }, iqamah: "16:00" },
+            { prayerKey: "maghrib", time: "18:18", name: "Syekh Imad Baqri", arabic: "الشيخ عماد بقري", maqam: "Rast", adhanType: { id: "Adzan Maghrib", en: "Maghrib Adhan" }, iqamah: "18:28" },
+            { prayerKey: "isha", time: "19:48", name: "Syekh Ali Ahmed Mullah", arabic: "الشيخ علي ملا", maqam: "Nahawand", adhanType: { id: "Adzan Isya", en: "Isha Adhan" }, iqamah: "20:08" }
+          ]
+        },
+        jumat: {
+          key: "jumat",
+          dayName: { id: "Jumat", en: "Friday" },
+          dateHijri: "14 Rabi'ul Akhir",
+          dateFull: "Jumat, 14 Rabi'ul Akhir 1448 H",
+          schedule: [
+            { prayerKey: "fajr1", time: "04:00", name: "Syekh Hussain Syahat", arabic: "الشيخ حسين شحات", maqam: "Hijaz", adhanType: { id: "Adzan 1 Subuh", en: "1st Fajr Adhan" }, iqamah: "04:20" },
+            { prayerKey: "fajr2", time: "04:55", name: "Syekh Muhammad Al-Amri", arabic: "الشيخ محمد العمري", maqam: "Hijaz", adhanType: { id: "Adzan 2 Subuh", en: "2nd Fajr Adhan" }, iqamah: "05:20" },
+            { prayerKey: "dhuhr", time: "12:15", name: "Syekh Ahmad Nahhas", arabic: "الشيخ أحمد نحاس", maqam: "Bayati", adhanType: { id: "Adzan 1 & 2 Shalat Jumat", en: "1st & 2nd Friday Adhan" }, iqamah: "12:35" },
+            { prayerKey: "asr", time: "15:40", name: "Syekh Muhammad Al-Amri", arabic: "الشيخ محمد العمري", maqam: "Sikah", adhanType: { id: "Adzan Ashar", en: "Asr Adhan" }, iqamah: "16:00" },
+            { prayerKey: "maghrib", time: "18:18", name: "Syekh Ahmad Nahhas", arabic: "الشيخ أحمد نحاس", maqam: "Rast", adhanType: { id: "Adzan Maghrib", en: "Maghrib Adhan" }, iqamah: "18:28" },
+            { prayerKey: "isha", time: "19:48", name: "Syekh Muhammad Al-Amri", arabic: "الشيخ محمد العمري", maqam: "Nahawand", adhanType: { id: "Adzan Isya", en: "Isha Adhan" }, iqamah: "20:08" }
+          ]
+        },
+        sabtu: {
+          key: "sabtu",
+          dayName: { id: "Sabtu", en: "Saturday" },
+          dateHijri: "15 Rabi'ul Akhir",
+          dateFull: "Sabtu, 15 Rabi'ul Akhir 1448 H",
+          schedule: [
+            { prayerKey: "fajr1", time: "04:00", name: "Syekh Muhammad Al-Amri", arabic: "الشيخ محمد العمري", maqam: "Hijaz", adhanType: { id: "Adzan 1 Subuh", en: "1st Fajr Adhan" }, iqamah: "04:20" },
+            { prayerKey: "fajr2", time: "04:55", name: "Syekh Hamad Daghreeri", arabic: "الشيخ حمد دغريري", maqam: "Hijaz", adhanType: { id: "Adzan 2 Subuh", en: "2nd Fajr Adhan" }, iqamah: "05:20" },
+            { prayerKey: "dhuhr", time: "12:15", name: "Syekh Turki Al-Hasani", arabic: "الشيخ تركي الحسني", maqam: "Bayati", adhanType: { id: "Adzan Dzuhur", en: "Dhuhr Adhan" }, iqamah: "12:35" },
+            { prayerKey: "asr", time: "15:40", name: "Syekh Ahmad Nahhas", arabic: "الشيخ أحمد نحاس", maqam: "Sikah", adhanType: { id: "Adzan Ashar", en: "Asr Adhan" }, iqamah: "16:00" },
+            { prayerKey: "maghrib", time: "18:18", name: "Syekh Muhammad Al-Maghribi", arabic: "الشيخ محمد المغربي", maqam: "Rast", adhanType: { id: "Adzan Maghrib", en: "Maghrib Adhan" }, iqamah: "18:28" },
+            { prayerKey: "isha", time: "19:48", name: "Syekh Ahmad Nahhas", arabic: "الشيخ أحمد نحاس", maqam: "Nahawand", adhanType: { id: "Adzan Isya", en: "Isha Adhan" }, iqamah: "20:08" }
+          ]
+        }
+      };
+
+      // Official Weekly Muadzin Roster for Al-Masjid An-Nabawi (9 - 15 Rabi'uts Tsani 1448 H)
+      const nabawiWeeklyMuadzins = {
+        ahad: {
+          key: "ahad",
+          dayName: { id: "Ahad", en: "Sunday" },
+          dateHijri: "09 Rabi'uts Tsani",
+          dateFull: "Ahad, 09 Rabi'uts Tsani 1448 H",
+          schedule: [
+            { prayerKey: "fajr1", time: "03:52", name: "Syekh Ahmad Al-Anshari", arabic: "الشيخ أحمد الأنصاري", maqam: "Hijaz", adhanType: { id: "Adzan 1 Subuh", en: "1st Fajr Adhan" }, iqamah: "04:12" },
+            { prayerKey: "fajr2", time: "04:52", name: "Syekh Abdul Rahman Khasyoggi", arabic: "الشيخ عبدالرحمن خاشقجي", maqam: "Hijaz", adhanType: { id: "Adzan 2 Subuh", en: "2nd Fajr Adhan" }, iqamah: "05:17" },
+            { prayerKey: "dhuhr", time: "12:15", name: "Syekh Muhammad Hakim", arabic: "الشيخ محمد حكيم", maqam: "Bayati", adhanType: { id: "Adzan Dzuhur", en: "Dhuhr Adhan" }, iqamah: "12:35" },
+            { prayerKey: "asr", time: "15:42", name: "Syekh Umar Kamal", arabic: "الشيخ عمر كمال", maqam: "Sikah", adhanType: { id: "Adzan Ashar", en: "Asr Adhan" }, iqamah: "16:02" },
+            { prayerKey: "maghrib", time: "18:21", name: "Syekh Usamah Al-Akhdhar", arabic: "الشيخ أسامة الأخضر", maqam: "Rast", adhanType: { id: "Adzan Maghrib", en: "Maghrib Adhan" }, iqamah: "18:31" },
+            { prayerKey: "isha", time: "19:51", name: "Syekh Anas Sharif", arabic: "الشيخ أنس الشريف", maqam: "Nahawand", adhanType: { id: "Adzan Isya", en: "Isha Adhan" }, iqamah: "20:11" }
+          ]
+        },
+        senin: {
+          key: "senin",
+          dayName: { id: "Senin", en: "Monday" },
+          dateHijri: "10 Rabi'uts Tsani",
+          dateFull: "Senin, 10 Rabi'uts Tsani 1448 H",
+          schedule: [
+            { prayerKey: "fajr1", time: "03:53", name: "Syekh Umar Kamal", arabic: "الشيخ عمر كمال", maqam: "Hijaz", adhanType: { id: "Adzan 1 Subuh", en: "1st Fajr Adhan" }, iqamah: "04:13" },
+            { prayerKey: "fajr2", time: "04:53", name: "Syekh Muhammad Hakim", arabic: "الشيخ محمد حكيم", maqam: "Hijaz", adhanType: { id: "Adzan 2 Subuh", en: "2nd Fajr Adhan" }, iqamah: "05:18" },
+            { prayerKey: "dhuhr", time: "12:15", name: "Syekh Ahmad Afifi", arabic: "الشيخ أحمد عفيفي", maqam: "Bayati", adhanType: { id: "Adzan Dzuhur", en: "Dhuhr Adhan" }, iqamah: "12:35" },
+            { prayerKey: "asr", time: "15:41", name: "Syekh Muhammad Qassas", arabic: "الشيخ محمد قصاص", maqam: "Sikah", adhanType: { id: "Adzan Ashar", en: "Asr Adhan" }, iqamah: "16:01" },
+            { prayerKey: "maghrib", time: "18:20", name: "Syekh Adil Katib", arabic: "الشيخ عادل كاتب", maqam: "Rast", adhanType: { id: "Adzan Maghrib", en: "Maghrib Adhan" }, iqamah: "18:30" },
+            { prayerKey: "isha", time: "19:50", name: "Syekh Abdullah Al-Hunaini", arabic: "الشيخ عبدالله الحنيني", maqam: "Nahawand", adhanType: { id: "Adzan Isya", en: "Isha Adhan" }, iqamah: "20:10" }
+          ]
+        },
+        selasa: {
+          key: "selasa",
+          dayName: { id: "Selasa", en: "Tuesday" },
+          dateHijri: "11 Rabi'uts Tsani",
+          dateFull: "Selasa, 11 Rabi'uts Tsani 1448 H",
+          schedule: [
+            { prayerKey: "fajr1", time: "03:53", name: "Syekh Muhammad Qassas", arabic: "الشيخ محمد قصاص", maqam: "Hijaz", adhanType: { id: "Adzan 1 Subuh", en: "1st Fajr Adhan" }, iqamah: "04:13" },
+            { prayerKey: "fajr2", time: "04:53", name: "Syekh Ahmad Afifi", arabic: "الشيخ أحمد عفيفي", maqam: "Hijaz", adhanType: { id: "Adzan 2 Subuh", en: "2nd Fajr Adhan" }, iqamah: "05:18" },
+            { prayerKey: "dhuhr", time: "12:15", name: "Syekh Umar Sumbul", arabic: "الشيخ عمر سنبل", maqam: "Bayati", adhanType: { id: "Adzan Dzuhur", en: "Dhuhr Adhan" }, iqamah: "12:35" },
+            { prayerKey: "asr", time: "15:41", name: "Syekh Mahdi Barri", arabic: "الشيخ مهدي بري", maqam: "Sikah", adhanType: { id: "Adzan Ashar", en: "Asr Adhan" }, iqamah: "16:01" },
+            { prayerKey: "maghrib", time: "18:19", name: "Syekh Anas Sharif", arabic: "الشيخ أنس الشريف", maqam: "Rast", adhanType: { id: "Adzan Maghrib", en: "Maghrib Adhan" }, iqamah: "18:29" },
+            { prayerKey: "isha", time: "19:49", name: "Syekh Iyad Shukri", arabic: "الشيخ إياد شكري", maqam: "Nahawand", adhanType: { id: "Adzan Isya", en: "Isha Adhan" }, iqamah: "20:09" }
+          ]
+        },
+        rabu: {
+          key: "rabu",
+          dayName: { id: "Rabu", en: "Wednesday" },
+          dateHijri: "12 Rabi'uts Tsani",
+          dateFull: "Rabu, 12 Rabi'uts Tsani 1448 H",
+          schedule: [
+            { prayerKey: "fajr1", time: "03:53", name: "Syekh Mahdi Barri", arabic: "الشيخ مهدي بري", maqam: "Hijaz", adhanType: { id: "Adzan 1 Subuh", en: "1st Fajr Adhan" }, iqamah: "04:13" },
+            { prayerKey: "fajr2", time: "04:53", name: "Syekh Umar Sumbul", arabic: "الشيخ عمر سنبل", maqam: "Hijaz", adhanType: { id: "Adzan 2 Subuh", en: "2nd Fajr Adhan" }, iqamah: "05:18" },
+            { prayerKey: "dhuhr", time: "12:14", name: "Syekh Saud Bukhari", arabic: "الشيخ سعود بخاري", maqam: "Bayati", adhanType: { id: "Adzan Dzuhur", en: "Dhuhr Adhan" }, iqamah: "12:34" },
+            { prayerKey: "asr", time: "15:40", name: "Syekh Sami Diwoli", arabic: "الشيخ سامي ديولي", maqam: "Sikah", adhanType: { id: "Adzan Ashar", en: "Asr Adhan" }, iqamah: "16:00" },
+            { prayerKey: "maghrib", time: "18:18", name: "Syekh Issam Bukhari", arabic: "الشيخ عصام بخاري", maqam: "Rast", adhanType: { id: "Adzan Maghrib", en: "Maghrib Adhan" }, iqamah: "18:28" },
+            { prayerKey: "isha", time: "19:48", name: "Syekh Abdul Majeed Surayhi", arabic: "الشيخ عبدالمجيد السريحي", maqam: "Nahawand", adhanType: { id: "Adzan Isya", en: "Isha Adhan" }, iqamah: "20:08" }
+          ]
+        },
+        kamis: {
+          key: "kamis",
+          dayName: { id: "Kamis", en: "Thursday" },
+          dateHijri: "13 Rabi'uts Tsani",
+          dateFull: "Kamis, 13 Rabi'uts Tsani 1448 H",
+          schedule: [
+            { prayerKey: "fajr1", time: "03:54", name: "Syekh Sami Diwoli", arabic: "الشيخ سامي ديولي", maqam: "Hijaz", adhanType: { id: "Adzan 1 Subuh", en: "1st Fajr Adhan" }, iqamah: "04:14" },
+            { prayerKey: "fajr2", time: "04:54", name: "Syekh Saud Bukhari", arabic: "الشيخ سعود بخاري", maqam: "Hijaz", adhanType: { id: "Adzan 2 Subuh", en: "2nd Fajr Adhan" }, iqamah: "05:19" },
+            { prayerKey: "dhuhr", time: "12:14", name: "Syekh Hasan Khasyoggi", arabic: "الشيخ حسن خاشقجي", maqam: "Bayati", adhanType: { id: "Adzan Dzuhur", en: "Dhuhr Adhan" }, iqamah: "12:34" },
+            { prayerKey: "asr", time: "15:40", name: "Syekh Asyraf Afifi", arabic: "الشيخ أشرف عفيفي", maqam: "Sikah", adhanType: { id: "Adzan Ashar", en: "Asr Adhan" }, iqamah: "16:00" },
+            { prayerKey: "maghrib", time: "18:16", name: "Syekh Abdul Rahman Khasyoggi", arabic: "الشيخ عبدالرحمن خاشقجي", maqam: "Rast", adhanType: { id: "Adzan Maghrib", en: "Maghrib Adhan" }, iqamah: "18:26" },
+            { prayerKey: "isha", time: "19:46", name: "Syekh Ahmad Al-Anshari", arabic: "الشيخ أحمد الأنصاري", maqam: "Nahawand", adhanType: { id: "Adzan Isya", en: "Isha Adhan" }, iqamah: "20:06" }
+          ]
+        },
+        jumat: {
+          key: "jumat",
+          dayName: { id: "Jumat", en: "Friday" },
+          dateHijri: "14 Rabi'uts Tsani",
+          dateFull: "Jumat, 14 Rabi'uts Tsani 1448 H",
+          schedule: [
+            { prayerKey: "fajr1", time: "03:54", name: "Syekh Asyraf Afifi", arabic: "الشيخ أشرف عفيفي", maqam: "Hijaz", adhanType: { id: "Adzan 1 Subuh", en: "1st Fajr Adhan" }, iqamah: "04:14" },
+            { prayerKey: "fajr2", time: "04:54", name: "Syekh Hasan Khasyoggi", arabic: "الشيخ حسن خاشقجي", maqam: "Hijaz", adhanType: { id: "Adzan 2 Subuh", en: "2nd Fajr Adhan" }, iqamah: "05:19" },
+            { prayerKey: "dhuhr", time: "12:14", name: "Syekh Usamah Al-Akhdhar", arabic: "الشيخ أسامة الأخضر", maqam: "Bayati", adhanType: { id: "Adzan Shalat Jumat", en: "Friday Prayer Adhan" }, iqamah: "12:34" },
+            { prayerKey: "asr", time: "15:39", name: "Syekh Anas Sharif", arabic: "الشيخ أنس الشريف", maqam: "Sikah", adhanType: { id: "Adzan Ashar", en: "Asr Adhan" }, iqamah: "15:59" },
+            { prayerKey: "maghrib", time: "18:15", name: "Syekh Muhammad Hakim", arabic: "الشيخ محمد حكيم", maqam: "Rast", adhanType: { id: "Adzan Maghrib", en: "Maghrib Adhan" }, iqamah: "18:25" },
+            { prayerKey: "isha", time: "19:45", name: "Syekh Umar Kamal", arabic: "الشيخ عمر كمال", maqam: "Nahawand", adhanType: { id: "Adzan Isya", en: "Isha Adhan" }, iqamah: "20:05" }
+          ]
+        },
+        sabtu: {
+          key: "sabtu",
+          dayName: { id: "Sabtu", en: "Saturday" },
+          dateHijri: "15 Rabi'uts Tsani",
+          dateFull: "Sabtu, 15 Rabi'uts Tsani 1448 H",
+          schedule: [
+            { prayerKey: "fajr1", time: "03:55", name: "Syekh Anas Sharif", arabic: "الشيخ أنس الشريف", maqam: "Hijaz", adhanType: { id: "Adzan 1 Subuh", en: "1st Fajr Adhan" }, iqamah: "04:15" },
+            { prayerKey: "fajr2", time: "04:55", name: "Syekh Usamah Al-Akhdhar", arabic: "الشيخ أسامة الأخضر", maqam: "Hijaz", adhanType: { id: "Adzan 2 Subuh", en: "2nd Fajr Adhan" }, iqamah: "05:20" },
+            { prayerKey: "dhuhr", time: "12:13", name: "Syekh Adil Katib", arabic: "الشيخ عادل كاتب", maqam: "Bayati", adhanType: { id: "Adzan Dzuhur", en: "Dhuhr Adhan" }, iqamah: "12:33" },
+            { prayerKey: "asr", time: "15:39", name: "Syekh Abdullah Al-Hunaini", arabic: "الشيخ عبدالله الحنيني", maqam: "Sikah", adhanType: { id: "Adzan Ashar", en: "Asr Adhan" }, iqamah: "15:59" },
+            { prayerKey: "maghrib", time: "18:14", name: "Syekh Ahmad Afifi", arabic: "الشيخ أحمد عفيفي", maqam: "Rast", adhanType: { id: "Adzan Maghrib", en: "Maghrib Adhan" }, iqamah: "18:24" },
+            { prayerKey: "isha", time: "19:44", name: "Syekh Muhammad Qassas", arabic: "الشيخ محمد قصاص", maqam: "Nahawand", adhanType: { id: "Adzan Isya", en: "Isha Adhan" }, iqamah: "20:04" }
+          ]
+        }
       };
 
       let currentMuadzinMosque = 'makkah';
+      let currentMuadzinDay = 'rabu';
 
       // Audio Tracks
       const tracks = [
@@ -3196,37 +3419,57 @@
           const roleText = typeof item.role === 'object' ? item.role[currentLang] || item.role.id : item.role;
           const bioText = typeof item.bio === 'object' ? item.bio[currentLang] || item.bio.id : item.bio;
           const tagText = typeof item.tag === 'object' ? item.tag[currentLang] || item.tag.id : item.tag;
-          const assignedText = currentLang === 'en' ? 'Official Assignment' : 'Ditugaskan Resmi';
-          const profileText = currentLang === 'en' ? 'View Profile' : 'Lihat Profil';
+          const assignedText = currentLang === 'en' ? 'Primary Imam' : 'Imam Utama';
+          const profileText = currentLang === 'en' ? 'Imam Profile' : 'Profil Syekh';
+          const backupLabel = currentLang === 'en' ? 'Reserve Imam (الاحتياطي)' : 'Imam Cadangan (الاحتياطي)';
+
+          const backupSection = item.backupName ? `
+            <div class="mt-3.5 p-2.5 rounded-xl bg-[#021512]/90 border border-gold-500/20 flex items-center justify-between gap-2">
+              <div class="min-w-0">
+                <span class="text-[10px] uppercase font-bold text-amber-300/80 flex items-center gap-1">
+                  <i data-lucide="shield-check" class="w-3 h-3 text-gold-400"></i>
+                  ${backupLabel}
+                </span>
+                <p class="text-xs font-semibold text-white truncate">${item.backupName}</p>
+                <p class="font-arabic text-[11px] text-gold-400 font-bold leading-tight">${item.backupArabic || ''}</p>
+              </div>
+              <button onclick="previewAdhanNotice('${item.backupName}')" class="shrink-0 px-2 py-1 rounded-lg bg-gold-500/15 hover:bg-gold-500/30 text-gold-300 text-[11px] font-medium transition flex items-center gap-0.5">
+                <span>Profil</span>
+                <i data-lucide="chevron-right" class="w-3 h-3"></i>
+              </button>
+            </div>
+          ` : '';
 
           return `
-            <div class="rounded-2xl p-6 bg-gradient-to-b from-emerald-950 to-[#04201c] border border-gold-500/30 hover:border-gold-400/60 shadow-xl transition-all duration-300 group animate-tab-fade" style="animation-delay: ${idx * 60}ms;">
-              <div class="flex items-start justify-between mb-4">
+            <div class="rounded-2xl p-5 sm:p-6 bg-gradient-to-b from-emerald-950 to-[#04201c] border border-gold-500/30 hover:border-gold-400/60 shadow-xl transition-all duration-300 group animate-tab-fade" style="animation-delay: ${idx * 50}ms;">
+              <div class="flex items-start justify-between mb-3.5">
                 <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-gold-500/20 text-gold-300 border border-gold-500/30">
                   ${prayerBadgeLabel}
                 </span>
-                <span class="text-[10px] text-amber-200/50 uppercase font-semibold">
+                <span class="text-[10px] text-amber-200/60 uppercase font-semibold">
                   ${tagText}
                 </span>
               </div>
 
-              <div class="flex items-center gap-4 mb-4">
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-gold-400 via-gold-500 to-amber-700 p-0.5 shadow-md shrink-0 group-hover:scale-105 transition-transform duration-300">
+              <div class="flex items-center gap-3.5 mb-3.5">
+                <div class="w-13 h-13 rounded-2xl bg-gradient-to-br from-gold-400 via-gold-500 to-amber-700 p-0.5 shadow-md shrink-0 group-hover:scale-105 transition-transform duration-300">
                   <div class="w-full h-full bg-emerald-950 rounded-[14px] flex items-center justify-center text-gold-400 font-serif font-bold text-lg">
-                    <i data-lucide="user-check" class="w-7 h-7"></i>
+                    <i data-lucide="user-check" class="w-6 h-6"></i>
                   </div>
                 </div>
                 <div>
-                  <h4 class="font-serif font-bold text-lg text-white group-hover:text-gold-300 transition">${item.name}</h4>
-                  <p class="font-arabic text-sm text-gold-400 font-bold">${item.arabic}</p>
+                  <h4 class="font-serif font-bold text-base sm:text-lg text-white group-hover:text-gold-300 transition">${item.name}</h4>
+                  <p class="font-arabic text-xs sm:text-sm text-gold-400 font-bold">${item.arabic}</p>
                 </div>
               </div>
 
-              <p class="text-xs font-semibold text-emerald-300 mb-2">${roleText}</p>
-              <p class="text-xs text-amber-100/60 leading-relaxed">${bioText}</p>
+              <p class="text-xs font-semibold text-emerald-300 mb-1.5">${roleText}</p>
+              <p class="text-xs text-amber-100/70 leading-relaxed">${bioText}</p>
+
+              ${backupSection}
 
               <div class="mt-4 pt-3 border-t border-gold-500/15 flex items-center justify-between text-xs">
-                <span class="text-[11px] text-gold-300/80 flex items-center gap-1">
+                <span class="text-[11px] text-gold-300/80 flex items-center gap-1 font-medium">
                   <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-400"></i>
                   ${assignedText}
                 </span>
@@ -3271,34 +3514,103 @@
         }
       }
 
+      function renderMuadzinDaySelector() {
+        const pickerWrap = document.getElementById('muadzin-day-picker-wrap');
+        const btnGroup = document.getElementById('muadzin-days-btn-group');
+        const titleEl = document.getElementById('muadzin-picker-title');
+        if (!pickerWrap || !btnGroup) return;
+
+        pickerWrap.classList.remove('hidden');
+        if (titleEl) {
+          if (currentMuadzinMosque === 'makkah') {
+            titleEl.textContent = currentLang === 'en' ? 'Select Day for Masjidil Haram Muadzins:' : 'Pilih Hari Penugasan Muadzin Masjidil Haram (Makkah):';
+          } else {
+            titleEl.textContent = currentLang === 'en' ? 'Select Day for Masjid Nabawi Muadzins:' : 'Pilih Hari Penugasan Muadzin Masjid Nabawi (Madinah):';
+          }
+        }
+
+        const days = ['ahad', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
+        const dataSource = currentMuadzinMosque === 'makkah' ? haramWeeklyMuadzins : nabawiWeeklyMuadzins;
+        
+        btnGroup.innerHTML = days.map(dayKey => {
+          const d = dataSource[dayKey];
+          if (!d) return '';
+          const isSelected = currentMuadzinDay === dayKey;
+          const label = typeof d.dayName === 'object' ? d.dayName[currentLang] || d.dayName.id : d.dayName;
+          
+          return `
+            <button onclick="selectMuadzinDay('${dayKey}')" class="p-2 sm:p-2.5 rounded-xl text-center border transition-all duration-200 ${
+              isSelected 
+                ? 'bg-gradient-to-r from-gold-500 to-amber-500 text-emerald-950 border-gold-400 font-bold shadow-md scale-[1.02]' 
+                : 'bg-[#04201c] text-amber-200/80 hover:text-white border-[#0e483b] hover:border-gold-500/50'
+            }">
+              <div class="text-xs font-bold leading-tight">${label}</div>
+              <div class="text-[10px] ${isSelected ? 'text-emerald-950 font-bold' : 'text-gold-400/80 font-mono'} leading-tight mt-0.5">${d.dateHijri}</div>
+            </button>
+          `;
+        }).join('');
+      }
+
+      function selectMuadzinDay(dayKey) {
+        currentMuadzinDay = dayKey;
+        renderMuadzinDaySelector();
+        const container = document.getElementById('muadzins-grid');
+        if (container) {
+          container.style.opacity = '0';
+          container.style.transform = 'translateY(6px)';
+          container.style.transition = 'opacity 0.14s ease-out, transform 0.14s ease-out';
+          setTimeout(() => {
+            renderMuadzins();
+            container.style.opacity = '1';
+            container.style.transform = 'translateY(0)';
+          }, 140);
+        } else {
+          renderMuadzins();
+        }
+      }
+
       function renderMuadzins() {
         const container = document.getElementById('muadzins-grid');
         if (!container) return;
-        const list = muadzinData[currentMuadzinMosque];
+
+        renderMuadzinDaySelector();
+
+        const dataSource = currentMuadzinMosque === 'makkah' ? haramWeeklyMuadzins : nabawiWeeklyMuadzins;
+        const dayData = dataSource[currentMuadzinDay] || dataSource.rabu;
+        const list = dayData.schedule;
+        const mosqueLabel = currentMuadzinMosque === 'makkah' 
+          ? (currentLang === 'en' ? 'Masjidil Haram Makkah' : 'Masjidil Haram Makkah')
+          : (currentLang === 'en' ? 'Al-Masjid An-Nabawi' : 'Masjid Nabawi Madinah');
+
+        container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3.5 sm:gap-4 transition-all duration-300 min-h-[160px] reveal-on-scroll reveal-delay-1";
 
         container.innerHTML = list.map((item, idx) => {
-          const prayerName = (prayerNamesI18n[currentLang] && prayerNamesI18n[currentLang][item.prayerKey]) || item.prayerKey;
-          const adhanLabel = currentLang === 'en' ? `Adhan ${prayerName}` : `Adzan ${prayerName}`;
-          const titleText = typeof item.title === 'object' ? item.title[currentLang] || item.title.id : item.title;
-
+          const adhanLabel = typeof item.adhanType === 'object' ? item.adhanType[currentLang] || item.adhanType.id : item.adhanType;
           return `
-            <div onclick="previewAdhanNotice('${item.name}')" class="rounded-xl p-4 bg-emerald-950/80 border border-gold-500/20 hover:border-gold-400/50 transition shadow-lg animate-tab-fade cursor-pointer group hover:bg-[#03221c]" style="animation-delay: ${idx * 45}ms;">
+            <div onclick="previewAdhanNotice('${item.name}')" class="rounded-xl p-4 bg-emerald-950/80 border border-gold-500/20 hover:border-gold-400/60 transition-all duration-200 shadow-lg animate-tab-fade cursor-pointer group hover:bg-[#03241d]" style="animation-delay: ${idx * 40}ms;">
               <div class="flex items-center justify-between mb-2">
                 <span class="text-xs font-bold uppercase tracking-wider text-gold-300">${adhanLabel}</span>
                 <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-900 text-emerald-200 border border-emerald-700/50">${item.maqam}</span>
               </div>
-              <h4 class="font-bold text-sm text-white mt-1 group-hover:text-gold-300 transition">${item.name}</h4>
-              <p class="font-arabic text-xs text-gold-400 font-bold mb-2">${item.arabic}</p>
+              <div class="flex items-center gap-1 text-xs text-amber-200/70 font-mono mb-2">
+                <i data-lucide="clock" class="w-3 h-3 text-gold-400"></i>
+                <span>${item.time} AST</span>
+                <span class="text-[10px] text-amber-300/60 ml-auto">Iqamah ${item.iqamah}</span>
+              </div>
+              <h4 class="font-bold text-sm text-white group-hover:text-gold-300 transition leading-snug">${item.name}</h4>
+              <p class="font-arabic text-xs text-gold-400 font-bold mb-2.5 mt-0.5">${item.arabic}</p>
               <div class="flex items-center justify-between pt-2 border-t border-gold-500/10 text-[11px]">
-                <span class="text-amber-200/60">${titleText}</span>
-                <span class="text-gold-400 font-semibold flex items-center gap-1 group-hover:underline">
-                  ${currentLang === 'en' ? 'Profile' : 'Profil'}
+                <span class="text-emerald-300 font-medium truncate mr-1">${mosqueLabel}</span>
+                <span class="text-gold-400 font-semibold flex items-center gap-0.5 shrink-0 group-hover:underline">
+                  ${currentLang === 'en' ? 'Bio' : 'Profil'}
                   <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
                 </span>
               </div>
             </div>
           `;
         }).join('');
+
+        if (window.lucide) window.lucide.createIcons();
       }
 
       function switchMuadzinMosque(mosque) {
@@ -4354,7 +4666,7 @@
         "Syekh Mahdi Barri": {
           name: "Syekh Mahdi Barri",
           fullName: "Syekh Mahdi bin Muhammad Barri",
-          arabic: "فضيلة الشيخ مهدي بري",
+          arabic: "فضيلة الشيخ مهدي بن محمد بري",
           mosqueName: { id: "Al-Masjid An-Nabawi • Madinah Al-Munawwarah", en: "Al-Masjid An-Nabawi • Madinah Al-Munawwarah" },
           roleBadge: { id: "Muadzin Resmi Masjid Nabawi • Ahli Maqam Nahawand", en: "Official Muadzin of Masjid Nabawi • Maqam Nahawand Specialist" },
           birth: {
@@ -4399,8 +4711,302 @@
             en: "Celebrated for soothing Maqam Nahawand and Kurdi calls, enhancing the serenity of night worshippers at the Prophet's Mosque."
           },
           dutyToday: {
-            id: "Dijadwalkan mengumandangkan adzan Isya di Masjid Nabawi sesuai penetapan resmi Otoritas Umum Urusan Dua Masjid Suci.",
-            en: "Scheduled to call the Isha Adhan at Al-Masjid An-Nabawi according to the official roster."
+            id: "Dijadwalkan mengumandangkan adzan di Masjid Nabawi sesuai penetapan resmi Otoritas Umum Urusan Dua Masjid Suci.",
+            en: "Scheduled to call the Adhan at Al-Masjid An-Nabawi according to the official roster."
+          }
+        },
+
+        "Syekh Dr. Al-Waleed Asy-Syamsan": {
+          name: "Syekh Dr. Al-Waleed Asy-Syamsan",
+          fullName: "Dr. Al-Waleed bin Khalid bin Ibrahim Asy-Syamsan",
+          arabic: "فضيلة الشيخ د. الوليد بن خالد بن إبراهيم الشمسان",
+          mosqueName: { id: "Masjidil Haram • Makkah Al-Mukarramah", en: "Masjidil Haram • Makkah Al-Mukarramah" },
+          roleBadge: { id: "Imam Masjidil Haram • Pakar Qira'at & Dosen Universitas", en: "Imam of Masjidil Haram • Qira'at Specialist & University Scholar" },
+          birth: {
+            short: { id: "Riyadh / Makkah Al-Mukarramah", en: "Riyadh / Makkah Al-Mukarramah" },
+            desc: {
+              id: "Lahir dari keluarga ilmuwan terhormat di Arab Saudi. Sejak usia belia telah menuntaskan hafalan Al-Qur'an 30 Juz dan mendalami qira'at asyrah di hadapan para ulama besar Haramain.",
+              en: "Born into a distinguished scholarly family in Saudi Arabia. Memorized the Holy Quran at an early age and mastered the Ten Quranic Recitations under eminent Haramain scholars."
+            }
+          },
+          highestDegree: {
+            id: "Doktor (Ph.D) Qira'at & Studi Al-Qur'an – Univ. Umm Al-Qura Makkah",
+            en: "Ph.D. in Qira'at & Quranic Studies – Umm Al-Qura University, Makkah"
+          },
+          education: {
+            id: [
+              "Menghafal Al-Qur'an 30 Juz secara mutqin dengan sanad bersambung.",
+              "Sarjana & Magister dalam Studi Qira'at dan Tafsir di Universitas Umm Al-Qura.",
+              "Doktor (Ph.D) dalam Studi Al-Qur'an dan Qira'at dengan predikat Mumtaz (Summa Cum Laude)."
+            ],
+            en: [
+              "Completed Quran memorization with authenticated contiguous chains of transmission (Isnad).",
+              "B.A. & Master's in Qira'at and Exegesis at Umm Al-Qura University.",
+              "Ph.D. in Quranic Studies & Recitations with highest honors (Summa Cum Laude)."
+            ]
+          },
+          career: {
+            id: [
+              "Dosen dan pengajar di Fakultas Dakwah dan Ushuluddin Universitas Umm Al-Qura Makkah.",
+              "Ditugaskan memimpin Shalat Tarawih & Tahajjud di Masjidil Haram Makkah.",
+              "Diangkat secara resmi sebagai Imam Tetap Masjidil Haram Makkah Al-Mukarramah.",
+              "Ditugaskan rutin memimpin Shalat Ashar dan Maghrib serta bertindak sebagai Imam Cadangan Utama Shalat Isya & Dzuhur."
+            ],
+            en: [
+              "Faculty member and lecturer at Umm Al-Qura University in Makkah.",
+              "Led Tarawih and Tahajjud prayers at the Grand Mosque in Makkah.",
+              "Officially appointed Permanent Imam of Al-Masjid Al-Haram in Makkah.",
+              "Regularly assigned to lead Asr and Maghrib prayers and serves as designated reserve Imam for Isha and Dhuhr."
+            ]
+          },
+          tilawah: {
+            id: "Memiliki karakter bacaan yang sangat tenang, makhraj huruf presisi tinggi sesuai kaidah tajwid tingkat lanjut, dan pembawaan tartil yang menenteramkan jiwa jamaah Ka'bah.",
+            en: "Characterized by remarkably serene recitation, pristine tajweed phonetics, and contemplative cadence."
+          },
+          dutyToday: {
+            id: "Ditugaskan resmi memimpin Shalat Ashar & Maghrib serta Imam Cadangan Shalat Isya & Dzuhur di Masjidil Haram.",
+            en: "Officially assigned to lead Asr & Maghrib and serves as reserve Imam for Dhuhr & Isha at Masjidil Haram."
+          }
+        },
+
+        "Syekh Ahmad Al-Anshari": {
+          name: "Syekh Ahmad Al-Anshari",
+          fullName: "Syekh Ahmad bin Muhammad Al-Anshari",
+          arabic: "فضيلة الشيخ أحمد بن محمد الأنصاري",
+          mosqueName: { id: "Al-Masjid An-Nabawi • Madinah Al-Munawwarah", en: "Al-Masjid An-Nabawi • Madinah Al-Munawwarah" },
+          roleBadge: { id: "Muadzin Resmi Masjid Nabawi • Irama Hijaz Madani", en: "Official Muadzin of Masjid Nabawi • Madani Hijaz Specialist" },
+          birth: {
+            short: { id: "Madinah Al-Munawwarah", en: "Madinah Al-Munawwarah" },
+            desc: {
+              id: "Lahir di Madinah Al-Munawwarah dari keluarga Anshari yang mulia. Tumbuh besar melantunkan adzan di serambi Masjid Nabi ﷺ.",
+              en: "Born in Madinah Al-Munawwarah into the noble Ansari lineage. Devoted caller of prayer at the Prophet's Mosque."
+            }
+          },
+          highestDegree: {
+            id: "Sarjana Studi Islam & Bahasa Arab",
+            en: "B.A. in Islamic Studies & Arabic"
+          },
+          education: {
+            id: [
+              "Hafidz Al-Qur'an 30 Juz di Halaqah Al-Qur'an Masjid Nabawi.",
+              "Studi keislaman dan tata bahasa Arab di Madinah.",
+              "Talaqqi nada adzan Madani dari generasi sesepuh muadzin."
+            ],
+            en: [
+              "Memorized the Quran in the circles of Al-Masjid An-Nabawi.",
+              "Studied Islamic sciences and Arabic linguistics in Madinah.",
+              "Mastered traditional Madani Adhan modulations."
+            ]
+          },
+          career: {
+            id: [
+              "Muadzin resmi Al-Masjid An-Nabawi Madinah Al-Munawwarah.",
+              "Ditugaskan mengumandangkan Adzan 1 Subuh dan Adzan Isya.",
+              "Dikenal dengan suara tinggi, bersih, dan syahdu."
+            ],
+            en: [
+              "Official Muadzin of Al-Masjid An-Nabawi.",
+              "Regularly assigned to 1st Fajr Adhan and Isha Adhan.",
+              "Renowned for a clear, soaring, and serene call."
+            ]
+          },
+          tilawah: {
+            id: "Khas dalam Maqam Hijaz dan Nahawand; menghadirkan ketenangan fajar dan keagungan malam Madinah.",
+            en: "Master of Maqam Hijaz and Nahawand, greeting the Madinah dawn with sublime calm."
+          },
+          dutyToday: {
+            id: "Ditugaskan mengumandangkan adzan di Masjid Nabawi sesuai jadwal mingguan resmi Presidensi.",
+            en: "Assigned to call the Adhan at the Prophet's Mosque according to the official weekly roster."
+          }
+        },
+
+        "Syekh Abdul Rahman Khasyoggi": {
+          name: "Syekh Abdul Rahman Khasyoggi",
+          fullName: "Syekh Abdul Rahman bin Hasan Khasyoggi",
+          arabic: "فضيلة الشيخ عبدالرحمن بن حسن خاشقجي",
+          mosqueName: { id: "Al-Masjid An-Nabawi • Madinah Al-Munawwarah", en: "Al-Masjid An-Nabawi • Madinah Al-Munawwarah" },
+          roleBadge: { id: "Muadzin Resmi Masjid Nabawi • Warisan Adzan Madani", en: "Official Muadzin of Masjid Nabawi • Madani Legacy" },
+          birth: {
+            short: { id: "Madinah Al-Munawwarah", en: "Madinah Al-Munawwarah" },
+            desc: {
+              id: "Berasal dari keluarga Khasyoggi yang memiliki tradisi panjang melayani menara adzan di kota Nabi ﷺ.",
+              en: "Hails from the respected Khashoggi lineage with generations of devoted service in calling prayer in Madinah."
+            }
+          },
+          highestDegree: {
+            id: "Sarjana Syariah & Studi Keislaman",
+            en: "B.A. in Sharia & Islamic Studies"
+          },
+          education: {
+            id: [
+              "Hafidz Al-Qur'an 30 Juz di bawah bimbingan para ulama Madinah.",
+              "Mendalami maqamat suara adzan Hijazi klasik."
+            ],
+            en: [
+              "Memorized the Quran under Madani scholars.",
+              "Trained in classical Hijazi Adhan Maqamat."
+            ]
+          },
+          career: {
+            id: [
+              "Muadzin resmi Al-Masjid An-Nabawi Madinah.",
+              "Ditugaskan rutin pada Adzan 2 Subuh dan Adzan Maghrib.",
+              "Suaranya menyentuh hati jutaan peziarah Makam Rasulullah ﷺ."
+            ],
+            en: [
+              "Official Muadzin of Al-Masjid An-Nabawi.",
+              "Assigned to 2nd Fajr Adhan and Maghrib Adhan.",
+              "Revered voice touching pilgrims around the Rawdah."
+            ]
+          },
+          tilawah: {
+            id: "Lantunan Maqam Hijaz dan Rast yang berwibawa dan penuh kehangatan spiritual.",
+            en: "Resonant Maqam Hijaz and Rast deliveries filled with spiritual warmth."
+          },
+          dutyToday: {
+            id: "Ditugaskan mengumandangkan adzan di Masjid Nabawi sesuai jadwal mingguan resmi.",
+            en: "Assigned to call the Adhan according to the official weekly roster."
+          }
+        },
+
+        "Syekh Muhammad Hakim": {
+          name: "Syekh Muhammad Hakim",
+          fullName: "Syekh Muhammad bin Ali Hakim",
+          arabic: "فضيلة الشيخ محمد بن علي حكيم",
+          mosqueName: { id: "Al-Masjid An-Nabawi • Madinah Al-Munawwarah", en: "Al-Masjid An-Nabawi • Madinah Al-Munawwarah" },
+          roleBadge: { id: "Muadzin Resmi Masjid Nabawi • Ahli Maqam Bayati", en: "Official Muadzin of Masjid Nabawi • Maqam Bayati Specialist" },
+          birth: {
+            short: { id: "Madinah Al-Munawwarah", en: "Madinah Al-Munawwarah" },
+            desc: {
+              id: "Lahir dan dibesarkan di Madinah. Memiliki suara emas yang merdu dan penuh kekhusyukan.",
+              en: "Born and raised in Madinah, endowed with a soothing and melodious golden tone."
+            }
+          },
+          highestDegree: {
+            id: "Sarjana Studi Al-Qur'an – Univ. Islam Madinah",
+            en: "B.A. in Quranic Studies – Islamic University of Madinah"
+          },
+          education: {
+            id: [
+              "Menghafal Al-Qur'an 30 Juz secara mutqin di Raudhah Syarifah.",
+              "Lulusan Fakultas Al-Qur'an Universitas Islam Madinah."
+            ],
+            en: [
+              "Memorized the Quran in the Prophet's Mosque.",
+              "Graduate of the Faculty of Holy Quran, Islamic Univ. of Madinah."
+            ]
+          },
+          career: {
+            id: [
+              "Muadzin resmi Al-Masjid An-Nabawi.",
+              "Ditugaskan mengumandangkan adzan Dzuhur, Maghrib, dan Subuh."
+            ],
+            en: [
+              "Official Muadzin of Al-Masjid An-Nabawi.",
+              "Assigned to Dhuhr, Maghrib, and Fajr Adhans."
+            ]
+          },
+          tilawah: {
+            id: "Piawai dalam Maqam Bayati dan Rast dengan ketukan ritme khas kota Nabi.",
+            en: "Renowned for Maqam Bayati and Rast intonations."
+          },
+          dutyToday: {
+            id: "Ditugaskan mengumandangkan adzan di Masjid Nabawi sesuai jadwal resmi.",
+            en: "Assigned to call the Adhan at the Prophet's Mosque."
+          }
+        },
+
+        "Syekh Umar Kamal": {
+          name: "Syekh Umar Kamal",
+          fullName: "Syekh Umar bin Nabil Kamal",
+          arabic: "فضيلة الشيخ عمر بن نبيل كمال",
+          mosqueName: { id: "Al-Masjid An-Nabawi • Madinah Al-Munawwarah", en: "Al-Masjid An-Nabawi • Madinah Al-Munawwarah" },
+          roleBadge: { id: "Muadzin Resmi Masjid Nabawi • Ahli Maqam Sikah & Nahawand", en: "Official Muadzin of Masjid Nabawi • Maqam Specialist" },
+          birth: {
+            short: { id: "Madinah Al-Munawwarah", en: "Madinah Al-Munawwarah" },
+            desc: {
+              id: "Muadzin muda berbakat yang mengemban amanah penyeruan adzan di menara Masjid Nabawi.",
+              en: "Talented young Muadzin serving the sacred minarets of the Prophet's Mosque."
+            }
+          },
+          highestDegree: {
+            id: "Sarjana Bahasa & Sastra Arab",
+            en: "B.A. in Arabic Language & Literature"
+          },
+          education: {
+            id: [
+              "Hafidz Al-Qur'an 30 Juz di Masjid Nabawi.",
+              "Mendalami qira'at dan seni maqamat vokal Madani."
+            ],
+            en: [
+              "Memorized the Quran at the Prophet's Mosque.",
+              "Studied Qira'at and Madani vocal maqamat."
+            ]
+          },
+          career: {
+            id: [
+              "Muadzin resmi Al-Masjid An-Nabawi.",
+              "Ditugaskan pada adzan Ashar, Isya, dan Adzan 1 Subuh."
+            ],
+            en: [
+              "Official Muadzin of Al-Masjid An-Nabawi.",
+              "Assigned to Asr, Isha, and 1st Fajr Adhans."
+            ]
+          },
+          tilawah: {
+            id: "Karakter vokal jernih dan melankolis dalam Maqam Sikah dan Nahawand.",
+            en: "Crystal-clear, moving delivery in Maqam Sikah and Nahawand."
+          },
+          dutyToday: {
+            id: "Ditugaskan mengumandangkan adzan di Masjid Nabawi sesuai jadwal resmi.",
+            en: "Assigned to call the Adhan at Al-Masjid An-Nabawi."
+          }
+        },
+
+        "Syekh Usamah Al-Akhdhar": {
+          name: "Syekh Usamah Al-Akhdhar",
+          fullName: "Syekh Usamah bin Ali Al-Akhdhar",
+          arabic: "فضيلة الشيخ أسامة بن علي الأخضر",
+          mosqueName: { id: "Al-Masjid An-Nabawi • Madinah Al-Munawwarah", en: "Al-Masjid An-Nabawi • Madinah Al-Munawwarah" },
+          roleBadge: { id: "Muadzin Resmi Masjid Nabawi • Irama Rast Klasik", en: "Official Muadzin of Masjid Nabawi • Classic Rast Specialist" },
+          birth: {
+            short: { id: "Madinah Al-Munawwarah", en: "Madinah Al-Munawwarah" },
+            desc: {
+              id: "Sosok muadzin berdedikasi tinggi yang melantunkan adzan dengan kekhusyukan mendalam di kota Madinah.",
+              en: "Dedicated Muadzin calling the faithful with profound devotion in the City of the Prophet ﷺ."
+            }
+          },
+          highestDegree: {
+            id: "Sarjana Ilmu Syariah Madinah",
+            en: "B.A. in Sharia Sciences, Madinah"
+          },
+          education: {
+            id: [
+              "Hafidz Al-Qur'an 30 Juz di Halaqah Raudhah.",
+              "Studi ilmu-ilmu syar'iyyah di Madinah."
+            ],
+            en: [
+              "Memorized the Quran in the Rawdah study circles.",
+              "Studied Sharia Sciences in Madinah."
+            ]
+          },
+          career: {
+            id: [
+              "Muadzin resmi Al-Masjid An-Nabawi.",
+              "Dipercaya mengumandangkan adzan Shalat Jumat, Maghrib, dan Subuh."
+            ],
+            en: [
+              "Official Muadzin of Al-Masjid An-Nabawi.",
+              "Assigned to Friday Prayer Adhan, Maghrib, and Fajr."
+            ]
+          },
+          tilawah: {
+            id: "Lantunan Maqam Rast dan Bayati yang megah, menenangkan, dan berkarakter kuat.",
+            en: "Majestic and tranquil recitations in Maqam Rast and Bayati."
+          },
+          dutyToday: {
+            id: "Ditugaskan mengumandangkan adzan di Masjid Nabawi sesuai penetapan resmi.",
+            en: "Assigned to call the Adhan at the Prophet's Mosque."
           }
         }
       };
@@ -4449,34 +5055,86 @@
           }
         }
 
-        // 6. Check against muadzinData fallback
-        for (const mosque of ['makkah', 'madinah']) {
-          for (const item of (muadzinData[mosque] || [])) {
-            if (item.name.toLowerCase() === lowerTarget || lowerTarget.includes(item.name.toLowerCase())) {
-              return {
-                name: item.name,
-                fullName: item.name,
-                arabic: item.arabic,
-                mosqueName: { 
-                  id: mosque === 'makkah' ? 'Masjidil Haram • Makkah Al-Mukarramah' : 'Al-Masjid An-Nabawi • Madinah Al-Munawwarah', 
-                  en: mosque === 'makkah' ? 'Masjidil Haram • Makkah Al-Mukarramah' : 'Al-Masjid An-Nabawi • Madinah Al-Munawwarah' 
-                },
-                roleBadge: { id: `Muadzin Resmi • Maqam ${item.maqam}`, en: `Official Muadzin • Maqam ${item.maqam}` },
-                birth: { short: { id: mosque === 'makkah' ? 'Makkah Al-Mukarramah' : 'Madinah Al-Munawwarah', en: mosque === 'makkah' ? 'Makkah' : 'Madinah' } },
-                highestDegree: { id: 'Pendidikan Keislaman & Maqamat Haramain', en: 'Haramain Islamic & Maqamat Studies' },
-                career: { 
-                  id: [`Muadzin Resmi pengumandang adzan di ${mosque === 'makkah' ? 'Masjidil Haram' : 'Masjid Nabawi'}.`], 
-                  en: [`Official Muadzin calling the faithful to prayer at ${mosque === 'makkah' ? 'Masjidil Haram' : 'Al-Masjid An-Nabawi'}.`] 
-                },
-                tilawah: {
-                  id: `Menguasai lantunan Adzan Maqam ${item.maqam} dengan ketukan khas tanah suci.`,
-                  en: `Master of Maqam ${item.maqam} Adhan intonations.`
-                },
-                dutyToday: {
-                  id: `Dijadwalkan mengumandangkan adzan ${item.prayerKey} hari ini.`,
-                  en: `Scheduled to call the ${item.prayerKey} Adhan today.`
-                }
-              };
+        // 6. Check against haramWeeklyMuadzins
+        if (typeof haramWeeklyMuadzins === 'object') {
+          for (const day of Object.values(haramWeeklyMuadzins)) {
+            for (const item of day.schedule) {
+              if (item.name.toLowerCase() === lowerTarget || lowerTarget.includes(item.name.toLowerCase()) || item.name.toLowerCase().includes(lowerTarget)) {
+                const dayLabel = typeof day.dayName === 'object' ? (day.dayName[currentLang] || day.dayName.id) : day.dayName;
+                const adhanLabel = typeof item.adhanType === 'object' ? (item.adhanType[currentLang] || item.adhanType.id) : item.adhanType;
+                return {
+                  name: item.name,
+                  fullName: item.name,
+                  arabic: item.arabic,
+                  mosqueName: { 
+                    id: 'Masjidil Haram • Makkah Al-Mukarramah', 
+                    en: 'Masjidil Haram • Makkah Al-Mukarramah' 
+                  },
+                  roleBadge: { id: `Muadzin Resmi Masjidil Haram • Maqam ${item.maqam}`, en: `Official Muadzin of Masjidil Haram • Maqam ${item.maqam}` },
+                  birth: { short: { id: 'Makkah Al-Mukarramah', en: 'Makkah Al-Mukarramah' } },
+                  highestDegree: { id: 'Pendidikan Keislaman & Maqamat Adzan Makki', en: 'Makkah Islamic & Adhan Maqamat Studies' },
+                  career: { 
+                    id: [
+                      'Diangkat resmi sebagai Muadzin Al-Masjid Al-Haram Makkah Al-Mukarramah.',
+                      `Ditugaskan mengumandangkan ${adhanLabel} di Masjidil Haram pada jadwal mingguan resmi Otoritas Umum Urusan Dua Masjid Suci.`
+                    ], 
+                    en: [
+                      'Officially appointed Muadzin of Al-Masjid Al-Haram in Makkah.',
+                      `Assigned to call the ${adhanLabel} at Masjidil Haram in the official weekly roster by the General Authority.`
+                    ] 
+                  },
+                  tilawah: {
+                    id: `Piawai melantunkan adzan dalam Maqam ${item.maqam} dengan nada syahdu khas Masjidil Haram.`,
+                    en: `Master of Maqam ${item.maqam} Adhan cadence echoing through the Holy Sanctuary.`
+                  },
+                  dutyToday: {
+                    id: `Dijadwalkan bertugas pada hari ${dayLabel} (${day.dateHijri}) untuk ${adhanLabel} pukul ${item.time} AST.`,
+                    en: `Scheduled on ${dayLabel} (${day.dateHijri}) for ${adhanLabel} at ${item.time} AST.`
+                  }
+                };
+              }
+            }
+          }
+        }
+
+        // 7. Check against nabawiWeeklyMuadzins
+        if (typeof nabawiWeeklyMuadzins === 'object') {
+          for (const day of Object.values(nabawiWeeklyMuadzins)) {
+            for (const item of day.schedule) {
+              if (item.name.toLowerCase() === lowerTarget || lowerTarget.includes(item.name.toLowerCase()) || item.name.toLowerCase().includes(lowerTarget)) {
+                const dayLabel = typeof day.dayName === 'object' ? (day.dayName[currentLang] || day.dayName.id) : day.dayName;
+                const adhanLabel = typeof item.adhanType === 'object' ? (item.adhanType[currentLang] || item.adhanType.id) : item.adhanType;
+                return {
+                  name: item.name,
+                  fullName: item.name,
+                  arabic: item.arabic,
+                  mosqueName: { 
+                    id: 'Al-Masjid An-Nabawi • Madinah Al-Munawwarah', 
+                    en: 'Al-Masjid An-Nabawi • Madinah Al-Munawwarah' 
+                  },
+                  roleBadge: { id: `Muadzin Resmi Masjid Nabawi • Maqam ${item.maqam}`, en: `Official Muadzin of Prophet's Mosque • Maqam ${item.maqam}` },
+                  birth: { short: { id: 'Madinah Al-Munawwarah', en: 'Madinah Al-Munawwarah' } },
+                  highestDegree: { id: 'Pendidikan Keislaman & Maqamat Adzan Madinah', en: 'Madinah Islamic & Adhan Maqamat Studies' },
+                  career: { 
+                    id: [
+                      'Diangkat resmi sebagai Muadzin Al-Masjid An-Nabawi Madinah Al-Munawwarah.',
+                      `Ditugaskan mengumandangkan ${adhanLabel} di Masjid Nabawi pada jadwal mingguan resmi.`
+                    ], 
+                    en: [
+                      'Officially appointed Muadzin of Al-Masjid An-Nabawi in Madinah.',
+                      `Assigned to call the ${adhanLabel} at the Prophet's Mosque in the official weekly roster.`
+                    ] 
+                  },
+                  tilawah: {
+                    id: `Piawai mengumandangkan adzan dalam Maqam ${item.maqam} dengan ketukan klasik Madani.`,
+                    en: `Skilled in calling the prayer in Maqam ${item.maqam} with traditional Madani cadence.`
+                  },
+                  dutyToday: {
+                    id: `Dijadwalkan bertugas pada hari ${dayLabel} (${day.dateHijri}) untuk ${adhanLabel} pukul ${item.time} AST.`,
+                    en: `Scheduled on ${dayLabel} (${day.dateHijri}) for ${adhanLabel} at ${item.time} AST.`
+                  }
+                };
+              }
             }
           }
         }
