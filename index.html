@@ -506,13 +506,6 @@
               </div>
               <i data-lucide="external-link" class="w-3 h-3 text-gold-400/80 -ml-1"></i>
             </a>
-            <a href="#panduan-haji-umrah-faq" class="flex items-center gap-2.5 text-xs text-amber-100/90 hover:text-white transition group">
-              <i data-lucide="help-circle" class="w-4 h-4 text-[#f5b731] group-hover:scale-110 transition-transform"></i>
-              <div class="leading-tight text-left font-medium">
-                <div>Panduan &</div>
-                <div>FAQ</div>
-              </div>
-            </a>
           </nav>
 
           <!-- Far Right Controls: Mode Ibadah, Language Switcher (ID/EN) & Siaran Makkah -->
@@ -3586,6 +3579,11 @@
 
         container.innerHTML = list.map((item, idx) => {
           const adhanLabel = typeof item.adhanType === 'object' ? item.adhanType[currentLang] || item.adhanType.id : item.adhanType;
+          const isFajr1 = item.prayerKey === 'fajr1';
+          const iqamahBadge = (!isFajr1 && item.iqamah) 
+            ? `<span class="text-[10px] text-amber-300/60 ml-auto">Iqamah ${item.iqamah}</span>` 
+            : '';
+
           return `
             <div onclick="previewAdhanNotice('${item.name}')" class="rounded-xl p-4 bg-emerald-950/80 border border-gold-500/20 hover:border-gold-400/60 transition-all duration-200 shadow-lg animate-tab-fade cursor-pointer group hover:bg-[#03241d]" style="animation-delay: ${idx * 40}ms;">
               <div class="flex items-center justify-between mb-2">
@@ -3595,7 +3593,7 @@
               <div class="flex items-center gap-1 text-xs text-amber-200/70 font-mono mb-2">
                 <i data-lucide="clock" class="w-3 h-3 text-gold-400"></i>
                 <span>${item.time} AST</span>
-                <span class="text-[10px] text-amber-300/60 ml-auto">Iqamah ${item.iqamah}</span>
+                ${iqamahBadge}
               </div>
               <h4 class="font-bold text-sm text-white group-hover:text-gold-300 transition leading-snug">${item.name}</h4>
               <p class="font-arabic text-xs text-gold-400 font-bold mb-2.5 mt-0.5">${item.arabic}</p>
